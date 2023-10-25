@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The End</title>
+</head>
+<body>
+<script src="../global.js"></script>
+<div style="width:300px; margin:auto;">
+    <h1>This is it.</br>The End.</br>You reached it.</h1>
+    <p>
+        No fanfares, no trumpets. No prize.
+    </p>
+    <p>
+        Just this text and you.<br>I hope this made your day a little better. If not, now you're in charge of making your day a little brighter.
+    </p>
+    <p>
+        You clicked <span id="clicks"><script>document.write(clicks)</script></span> times.
+    </p>
+    <p>
+        By the way: The codeword is "Rüebli".
+    </p>
+    <p>
+        <a href="../menu">Here</a> you can see all the Levels again.
+    </p>
+    <p>
+        If you liked this or feel the urge to contact me, here is my address: <a href="mailto:info@giannihorst.ch">info@giannihorst.ch. Please include the codeword in the mail.</a>
+    </p>
+</div>
+<script>
+    document.body.addEventListener("click", function (event) {
+clickP = document.getElementById("clicks")
+            clickP.innerHTML = clicks
+    })
+</script>
+</body>
+</html>
+

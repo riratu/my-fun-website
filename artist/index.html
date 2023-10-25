@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artists</title>
+  <script src="../lib/p5.min.js"></script>
+  <!--  <script src="p5.sound.min.js"></script>-->
+  <script src="../lib/planck.min.js"></script>
+  <script src="../lib/p5play.js"></script>
+  <script src="../lib/sketch.js"></script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      font-family: Caprasimo;
+    }
+
+    @font-face {
+      font-family: Caprasimo;
+      src: url(../media/Caprasimo-Regular.ttf);
+    }
+
+    .text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      position: absolute;
+    }
+
+    #mainText {
+      width:60%;
+    }
+
+    #link {
+      color: blue;
+      text-decoration-line: underline;
+    }
+
+  </style>
+</head>
+<body>
+<script src="../global.js"></script>
+<div class="text"><h1 id="mainText">As an artist, you should develop a style and stick to it. This way, the people can get used to it. If you try new things all the time, it is just <a id="link" onclick="handleHover()">too much</a>.</h1></div>
+</body>
+</html>
+<script src="sketch.js"></script>
+</head>
+
+<body>
+<main>
+</main>
+</body>
+
+</html>

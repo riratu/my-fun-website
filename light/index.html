@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Light</title>
+</head>
+<body>
+<style>
+    html, body {
+        font-family: system-ui;
+        background: #000;
+        color: darkgrey;
+        overflow: hidden;
+        height: 100%;
+        position: relative;
+    }
+
+    h1 {
+        position: absolute;
+        top: 10%;
+        left: 20px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 30%;
+    }
+</style>
+<script src="../global.js"></script>
+<h1>Be the light you want the world to see in.</h1>
+
+<script>
+    var number = 1;
+    document.body.addEventListener("click", function (event) {
+        if (number >= 2) next()
+        var screen = document.createElement("img")
+        screen.className = "jochen"
+        screen.style.left = "0px"
+        screen.style.top = "0px"
+        screen.src = "jochen.jpg"
+        document.body.appendChild(screen)
+        number++
+    });
+</script>
+</body>
+</html>

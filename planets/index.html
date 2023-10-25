@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<style>
+    html, body {
+        background-color: black;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .planetContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .planets {
+        height: 0%;
+        position: absolute;
+    }
+
+    @keyframes zoom {
+        0% {
+            transform: rotate(0deg);
+        }
+        60% {
+            opacity: 100%;
+        }
+        100% {
+            opacity: 0%;
+            height: 300%;
+            transform: rotate(50deg);
+        }
+    }
+    a {
+        color: lavender;
+    padding: 10px 10px;
+        font-size: 1.5rem;
+    }
+</style>
+
+<body>
+<p><a href="#" onclick="next()">next</a></p>
+<script src="../global.js"></script>
+<div class="planetContainer">
+    <img class="planets" src="img/roots.png">
+    <img class="planets" src="img/mushrooms1.png">
+    <img class="planets" src="img/trees1.png">
+    <img class="planets" src="img/city1.png">
+    <img class="planets" src="img/puppies1.png">
+    <img class="planets" src="img/railcars2.png">
+    <img class="planets" src="img/flowers3.png">
+    <img class="planets" src="img/mushrooms6.png">
+    <img class="planets" src="img/stinkmorchel1.png">
+    <img class="planets" src="img/flowers2.png">
+    <img class="planets" src="img/mushrooms3.png">
+    <img class="planets" src="img/cats.png">
+    <img class="planets" src="img/railway.png">
+    <img class="planets" src="img/strange.png">
+    <img class="planets" src="img/stinkmorchel2.png">
+</div>
+<script>
+    const planets = document.getElementsByClassName("planets");
+
+    for (let i = 0; i < planets.length; i++) {
+        const planet = planets[i];
+        const delay = i * 0.2;
+        planet.addEventListener('load', function () {
+            console.log("loaded")
+        planet.style.animation = "zoom 3s ease-in"
+            planet.style.animationDelay = delay + "s";
+        })
+    }
+
+    document.body.addEventListener("click", function (){
+
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Find Happiness</title>
+  <style>
+
+    html, body {
+      font-family: system-ui;
+      background: #FFF;
+      color: black;
+      overflow: scroll;
+      height: 100%;
+      position: relative;
+    }
+
+    button {
+      margin: 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5px 20px;
+      text-decoration: none;
+      border: none;
+    }
+
+    div {
+      padding: 3px;
+      margin-left: 20px;
+    / / border: seagreen solid 1 px;
+    }
+  </style>
+  <script>
+
+    let texts = [
+        "Somehing Boring",
+        "Something mondaine",
+        "Something old",
+        "An Ex Partner",
+        "Something expencive"
+    ]
+
+    const getRandomColor = () => {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get all buttons on the page
+      const buttons = document.getElementsByTagName("button");
+      for (const button of buttons) {
+        button.onclick = createButtons
+      }
+    });
+
+    function createButtons() {
+
+      this.removeEventListener("click", createButtons);
+        var button = document.createElement("button")
+        button.onclick = createButtons
+        button.innerHTML = "Happiness"
+      button.style.backgroundColor = getRandomColor()
+      this.insertAdjacentElement('afterend', button)
+      this.style.backgroundColor = "grey"
+        this.innerHTML = texts.shift()
+    }
+  </script>
+</head>
+<body>
+<button style="background-color: lightblue" data-option="1">Happiness</button>
+</body>
+</html>

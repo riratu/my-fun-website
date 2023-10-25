@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To The Mountains</title>
+</head>
+<body>
+<script src="../global.js"></script>
+<style>
+
+    html, body {
+        font-family: system-ui;
+        background: #FFF;
+        color: black;
+        overflow: hidden;
+        height: 100%;
+        position: relative;
+    }
+
+    ::selection {
+        background-color: none;
+    }
+
+    .cable {
+        width: 100%;
+        height: 5px;
+        background-color: black;
+        margin-top: 50px;
+        position: absolute;
+    }
+
+    .cable-highlight {
+        width: 100%;
+        height: 1px;
+        background-color: dimgrey;
+        margin-top: 51px;
+        position: absolute;
+    }
+
+    .chair {
+        animation: pendel 2s infinite ease-in-out alternate;
+        margin-top: 20px;
+        height: 400px;
+        position: absolute;
+        transform-origin: 50% 0%;
+        left: -10%;
+    }
+
+    #counter {
+        margin-left: 50%;
+        margin-top: 10px;
+        position: absolute;
+        padding: 5px 10px;
+    }
+
+    @keyframes pendel {
+        0% {
+            transform: rotate(-1deg);
+        }
+        100% {
+            transform: rotate(1deg);
+        }
+    }
+</style>
+
+<div class="cable">
+</div>
+<div class="cable-highlight">
+</div>
+<button id="counter"></button>
+
+<script>
+    function translateChairs() {
+        const maxWidth = window.innerWidth + 500;
+
+        setInterval(() => {
+
+            var chairs = document.getElementsByClassName("chair");
+
+            document.getElementById("counter").innerHTML = (10 - number)
+
+            for (let i = 0; i < chairs.length; i++) {
+                let currentPosition = chairs[i].offsetLeft;
+                currentPosition++;
+                chairs[i].style.left = currentPosition + "px";
+
+                if (currentPosition > maxWidth) {
+                    chairs[i].remove();
+                }
+
+            }
+        }, 5);
+    }
+    number = 0;
+    document.body.addEventListener("click", function (event) {
+        chairs = document.getElementsByClassName("chair");
+        if (number >=10) next();
+        var chair = document.createElement("img");
+        chair.className = "chair";
+        chair.style.animationDelay = Math.random() * 2 + "s";
+        chair.src = "chairlift.png";
+        document.body.appendChild(chair);
+        number ++
+    });
+
+    // Call the function when the page has finished loading
+    window.addEventListener("load", translateChairs);
+</script>
+
+</body>
+</html>

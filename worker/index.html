@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Worker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+
+        body {
+            height: 100%;
+            padding-top: 20vh;
+            /*font-size: ;*/
+            font-family: system-ui;
+        }
+
+        #progressbarWrapper {
+            height: 30px;
+            width: 50%;
+            max-width: 80%;
+            display: block;
+            visibility:hidden;
+            margin: auto;
+            margin-top: 20vh;
+            position: relative;
+            background: #555;
+            padding: 3px;
+            /*box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);*/
+        }
+
+        #greenBar {
+            display: block;
+            height: 100%;
+            width: 0px;
+            background-color: rgb(43, 194, 83);
+            position: relative;
+            overflow: hidden;
+            font-size: 15px;
+            text-align: center;
+            color: white;
+            transition: all 300ms ease;
+        }
+
+        #theSoultionButton {
+            display: block;
+            margin-left: 50%;
+            margin-top: 20px;
+            transform: translate(-50px, 0);
+            /*Oh, you saw that! This embarrasing.
+            Sorry,i am in a train
+            riding over the alps, because another train was
+            broken and i want to look out the window now.
+            And i do not want to find out why the center
+            thingens does not work as i think it should.*/
+            visibility: hidden;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            border: none;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+            /*box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);*/
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: inherit;
+            font-family: inherit;
+        }
+    </style>
+    <script>
+
+        var running = false;
+        var workingProof = [
+            "preparing workload",
+            "generating agent",
+            "compiling kernel",
+            "making core decisions",
+            "submit decisions",
+            "reverting decisions",
+            "finishing work plan",
+            "begin with workload",
+            "redefining target",
+            "reporting to core-team",
+            "wonder why it is not finished by now",
+            "starting over with better concept",
+            "change plan",
+            "realise it can not be done like this",
+            "throw away the work",
+            "do nothing again"
+        ]
+        function move() {
+            if (running === true) return
+            else running = true
+          document.getElementById("progressbarWrapper").style.visibility = "visible"
+
+            let button = document.getElementById("veryImportantButton")
+            let elem = document.getElementById("greenBar");
+            let stepValue = 0;
+            let interval = setInterval(frame, 150);
+
+            function frame() {
+
+                maxSteps = 151
+                if (stepValue >= maxSteps) {
+                    clearInterval(interval);
+                    document.getElementById("theSoultionButton").style.visibility = "visible"
+                    elem.style.width = "0px";
+                    running = false
+                } else {
+                    if (stepValue % 10 == 0){
+                        console.log(stepValue)
+                            button.innerHTML = workingProof[stepValue/10]
+                    }
+                    elem.style.width = (stepValue + 1) + "%";
+                    stepValue += 1;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<script src="../global.js"></script>
+<section>
+    <div id="progressbarWrapper">
+        <span id="greenBar"></span>
+    </div>
+    <button id="veryImportantButton" onclick="move()">do nothing</button>
+    <a id="theSoultionButton" href="../screens">take me away</a>
+</section>
+</body>
+</html>

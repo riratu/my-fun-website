@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Right Thing</title>
+    <style>
+
+        html, body {
+            font-family: system-ui;
+            background: #FFF;
+            color: black;
+            overflow: scroll;
+            height: 100%;
+            position: relative;
+        }
+
+        button {
+            margin: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 5px 20px;
+            text-decoration: none;
+            border: none;
+        }
+
+        div {
+            padding: 3px;
+            margin-left: 20px;
+        / / border: seagreen solid 1 px;
+        }
+    </style>
+    <script>
+        var number = 4;
+
+        const getRandomColor = () => {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all buttons on the page
+            const buttons = document.getElementsByTagName("button");
+
+            for (const button of buttons) {
+                button.onclick = createButtons
+            }
+        });
+
+        function createButtons() {
+
+            const div = document.createElement("div")
+            div.style.backgroundColor = getRandomColor()
+            this.insertAdjacentElement('afterend', div)
+            this.removeEventListener("click", createButtons);
+
+            if (number > 8){
+                alert('Congratulations! You made the best decision.')
+                next()
+            }
+            for (i = 1; i < (number * (number * 0.8)); i++) {
+                var button = document.createElement("button")
+                button.onclick = createButtons
+                //level = Number(this.getAttribute('data-level')) + 1
+                //button.innerHTML = "Google " + "Sub-".repeat(level) + "Option " + i
+                // option = "Option" + this.getAttribute('data-option') + "." + i
+                button.innerHTML = this.innerHTML + "." + i
+                button.setAttribute("data-option", i);
+                div.appendChild(button)
+            }
+            number++;
+        }
+    </script>
+</head>
+<body>
+<script src="../global.js"></script>
+<h1>Make the best Decision</h1>
+<div>
+    <button style="background-color: lightblue" data-option="1">Explore Option 1</button>
+</div>
+<div>
+    <button style="background-color: lightblue" data-option="2">Explore Option 2</button>
+</div>
+<div>
+    <button style="background-color: lightblue" data-option="3">Explore Option 3</button>
+</div>
+</body>
+</html>

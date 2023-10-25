@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Coding visuals</title>
+    <script src="../lib/p5.min.js"></script>
+    <script src="../lib/p5.sound.min.js"></script>
+    <style>
+        h1 {
+            position: absolute;
+            bottom: 10%;
+            left: 20px;
+            font-family: "Helvetica Neue", Arial;
+            line-height: 6vmin;
+            font-size: 7vmin;
+            color: dimgray;
+            mix-blend-mode: difference;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+<h1>I am not sure if it is good or bad when my life feels like this.</h1>
+
+
+<script id="eins" src="js/terrain.js"></script>
+<script src="../global.js"></script>
+<script>
+
+    let scriptArray = [
+        "waves.js",
+        "dreiecke.js",
+        "terrain.js",
+        "circlebahnen.js",
+        "trails.js"
+    ]
+
+    function createjscssfile(filename) {
+        var fileref = document.createElement('script')
+        fileref.setAttribute("type", "text/javascript")
+        fileref.setAttribute("src", filename)
+        fileref.setAttribute("id", "eins")
+        return fileref
+    }
+
+    function replacejscssfile(newfilename) {
+        script = document.getElementById("eins")
+        script.remove()
+        window.location.reload(false);
+        //document.getElementById("defaultCanvas0").remove()
+        var fileref = document.createElement('script')
+        fileref.setAttribute("type", "text/javascript")
+        fileref.setAttribute("src", newfilename)
+        fileref.setAttribute("id", "eins")
+        document.body.append(fileref)
+    }
+
+    addEventListener("keydown", (event) => {
+        scriptNo = event.code.split("Digit")[1]
+        console.log(scriptNo)
+        newScript = scriptArray[scriptNo]
+       console.log(newScript)
+        if (newScript !== undefined) {
+            replacejscssfile("js/" + newScript)
+            return
+        }
+    })
+    ;
+
+    document.body.addEventListener("click", function (event) {
+    next()
+    });
+</script>
+<div class="text">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accident</title>
+</head>
+<body>
+<style>
+    html, body {
+        font-family: system-ui;
+        background: #000;
+        color: darkgrey;
+        overflow: hidden;
+        height: 100%;
+        position: relative;
+    }
+
+    h1 {
+        position: absolute;
+        top: 30%;
+        left: 30%;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 30%;
+    }
+</style>
+<script src="../global.js"></script>
+<h1>I did not create this. No one did. It is art without an artist. It simply emerged from a random combination of elements that led to a malfunctioning processor.</h1>
+
+<script>
+    var number = 1;
+    document.body.addEventListener("click", function (event) {
+        if (number >= 2) next()
+        var screen = document.createElement("img")
+        screen.className = "glitch"
+        screen.style.left = "0px"
+        screen.style.top = "0px"
+        screen.src = "glitch.png"
+        document.body.appendChild(screen)
+        number++
+    });
+</script>
+</body>
+</html>

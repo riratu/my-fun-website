@@ -1,0 +1,148 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>I am glad you are here.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<header>
+
+    <style>
+        body {
+            display: flex;
+            background-color: black;
+            overflow: scroll;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .element {
+            animation: rotate 30s infinite ease-in-out alternate;
+            height: 2px;
+            margin-left: 10px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .container {
+            animation: container 20s infinite alternate ease-in-out;
+            margin-left: 40%;
+            margin-top: 40%;
+            width: 200px;
+            height: 200px;
+        }
+        @keyframes container {
+            0% {
+                margin-top: 40%;
+                margin-left: 40%;
+            }
+           50% {
+              margin-top: 10%;
+           }
+            100% {
+                margin-top: 40%;
+                margin-left: 40%;
+            }
+        }
+        .button {
+            flex-wrap: wrap;
+            height: 30px;
+            width: 300px;
+            margin: 10px
+        }
+    </style>
+
+</header>
+                        <script>
+                            //Oh, you are looking at my private party. If i knew you are looking, i had cleaned up a bit.
+                            //And of course you can find the solution to the puzzle here but...
+
+                            wallOfButtons()
+
+                            var buttonsClicked = 0;
+
+                            //Do not delete This!!!!!
+                            //(I tried, but everything stopped working.)
+                            console.log("Praise the great Whologlorp!")
+
+                            function wallOfButtons() {
+                                var numButtons = 40;
+                                var doc = document;
+
+                                for (var i = 0; i < numButtons; i++) {
+                                    var buttonElement = doc.createElement('button');
+
+                                    buttonElement.setAttribute('id', 'button-' + i);
+                                    buttonElement.classList.add("button");
+                                    //buttonElement.style.backgroundColor = getRandomColor();
+                                    buttonElement.innerHTML = "click me..."
+                                    buttonElement.onclick = buttonClicked;
+                                    doc.body.appendChild(buttonElement);
+                                }
+                            }
+
+                            function buttonClicked (){
+                                buttonsClicked += 1;
+
+                                let text = buttonText[buttonsClicked];
+                                if (text !== undefined) {
+                                    this.innerHTML = text
+                                } else {
+                                    this.innerHTML = ""
+                                }
+                                this.style.backgroundColor = "red";
+                                this.classList.add("element");
+
+                                if (buttonsClicked === 9){
+                                    this.style.backgroundColor = "lightgreen";
+                                    //this.onclick = "lineFun.html";
+                                    this.addEventListener('click', () => {
+                                        window.document.location = "lines"
+                                    });
+                                }
+                                if (buttonsClicked > 20) {
+                                    document.body.style.backgroundColor = getRandomColor();
+                                }
+                            }
+
+                            const buttonText =
+                                {
+                                    1: "Hello. I am Gianni",
+                                    2: "i am a developer",
+                                    3: "and i do other things",
+                                    4: "like all the things",
+                                    5: "on this Site.",
+                                    6: "You can keep",
+                                    7: "clicking.",
+                                    8: "When you clicked enough,",
+                                    9: "you can click here again",
+                                    15: "Ich bin beeindruckt von deiner Ausdauer",
+                                    20: "Wow",
+                                    22: "Du bekommst einen Gutschein!",
+                                    23: "Es ist einfach nicht so klar wozu.",
+                                    24: "Aber vieleicht bringt er dir mal was.",
+                                    30: "Jetzt kommt nichts mehr.",
+                                    32: "Es ist fertig.",
+                                    33: "Wirklich.",
+                                    34: "Oder willst du noch eine Lebensweisheit?",
+                                    37: "Ok, hier:",
+                                    40: "You Won."
+                                }
+
+                            function getRandomColor() {
+                                var letters = '0123456789ABCDEF';
+                                var color = '#';
+                                for (var i = 0; i < 6; i++) {
+                                    color += letters[Math.floor(Math.random() * 16)];
+                                }
+                                return color;
+                            }
+                        </script>
+</html>

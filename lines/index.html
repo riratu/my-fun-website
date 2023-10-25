@@ -1,0 +1,128 @@
+<html>
+
+<header>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            display: flex;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .element, .container {
+
+        }
+
+        .element {
+            animation: rotate 20s infinite ease-in-out alternate;
+            background-color: red;
+            height: 2px;
+            margin-left: 10px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(-20deg);
+                width:100px;
+                margin-left: 20px;
+                height: 2px;
+            }
+            50% {
+                height: 5px;
+            }
+            100% {
+                transform: rotate(20deg);
+                width: 107%;
+                height: 100px;
+            }
+        }
+        .container {
+            animation: container 20s infinite alternate ease-in-out;
+            margin-left: 40%;
+            margin-top: 40%;
+            width: 200px;
+            height: 200px;
+        }
+        @keyframes container {
+            0% {
+                margin-top: 40%;
+                margin-left: 40%;
+            }
+           50% {
+              margin-top: 10%;
+           }
+            100% {
+                margin-top: 40%;
+                margin-left: 40%;
+            }
+        }
+        .button {
+            flex-wrap: wrap;
+            height: 30px;
+            width: 100px;
+            margin: 10px
+        }
+
+        .nextbutton
+        {
+            position: absolute;
+            height: 50px;
+        width: 130px;
+            margin-top: 15%;
+            margin-left: 10%;
+        }
+    </style>
+    <script src="../global.js"></script>
+</header>
+
+                        <script>
+
+                            function lineFun (){
+                                // Get the document object
+                                var doc = document;
+
+                                // Create a container div to hold the nested divs
+                                var container = doc.createElement('div');
+                                container.classList.add("container");
+                                container.setAttribute('id', 'container');
+
+
+                                // Append the container div to the document body
+                                doc.body.appendChild(container);
+
+
+                                createDivs(container);
+                            }
+
+                            function createDivs(parentContainer) {
+                                var numDivs = 400;
+                                var scaleIncrement = 1 / numDivs;
+                                var rotationAngle = 260;
+                                var doc = document;
+
+                                for (var i = 0; i < numDivs; i++) {
+                                    var divElement = doc.createElement('div');
+
+                                    divElement.classList.add("element");
+                                    divElement.style.scale = 1 - i * scaleIncrement;
+                                    divElement.style.backgroundColor = getRandomColor();
+                                    divElement.innerHTML = "."
+
+                                    container.appendChild(divElement);
+                                    container = divElement;
+                                }
+                            }
+
+                            function getRandomColor() {
+                                var letters = '0123456789ABCDEF';
+                                var color = '#';
+                                for (var i = 0; i < 6; i++) {
+                                    color += letters[Math.floor(Math.random() * 16)];
+                                }
+                                return color;
+                            }
+
+                        </script>
+<button onclick="next()" class="nextbutton">Ich bin bereit</button>
+</html>

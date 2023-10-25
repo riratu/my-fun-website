@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information technology enables the world</title>
+</head>
+<body>
+<style>
+
+    html, body {
+        font-family: system-ui;
+        background: #FFF;
+        color: black;
+        overflow: hidden;
+        height: 100%;
+        position: relative;
+    }
+
+    ::selection {
+        background-color: none;
+    }
+
+    h1 {
+        position: absolute;
+        top: 10%;
+        left: 20px;
+    }
+
+    .screen {
+        animation: pendel 2s infinite ease-in-out alternate;
+        height: 80vmin;
+        position: absolute;
+    }
+
+    #counter {
+        margin-left: 50%;
+        position: absolute;
+    }
+
+    @keyframes pendel {
+        0% {
+            transform: rotate(-1deg);
+        }
+        100% {
+            transform: rotate(1deg);
+        }
+    }
+</style>
+<script src="../global.js"></script>
+<h1>Computer technology enables us to do things we could never imagine.</h1>
+
+<script>
+    var number = 1;
+    document.body.addEventListener("click", function (event) {
+        if (number >= 15) next()
+        var screen = document.createElement("img")
+        screen.className = "screen"
+        screen.style.left = (Math.random() * 200) + "px"
+        screen.style.top = (Math.random() * 200) + "px"
+        screen.src = "img/" + number + ".jpeg"
+        document.body.appendChild(screen)
+        number++
+    })
+
+    // Call the function when the page has finished loading
+    window.addEventListener("load", translateChairs);
+</script>
+
+</body>
+</html>

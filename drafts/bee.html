@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moving Square with Rotation and Long Trail</title>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const squareSize = 30;
+    var squareX = canvas.width / 2 - squareSize / 2;
+    var squareY = canvas.height / 2 - squareSize / 2;
+    let squareAngle = 0; // Angle in radians
+    const squareSpeed = 1.5; // Speed of movement
+
+    const trail = [];
+    var mouseX = canvas.width / 2 - squareSize / 2;
+    var mouseY = .height / 2 - squareSize / 2;
+    var frameCount = 0;
+
+    var trailSegmentLength = 4;
+    var segmentTracker = 0;
+
+    canvas.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    })
+
+    function update() {
+        frameCount++;
+        // Update square position
+
+
+        // Calculate the difference between current and target positions
+        var dx = mouseX - squareX - squareSize / 2 + Math.sin(frameCount * 0.02) * 200;
+        var dy = mouseY - squareY - squareSize / 2 + Math.cos(frameCount * 0.013) * 200//+ Math.sin(squareY * 10);
+
+        squareAngle = Math.atan2(dy, dx);
+
+        console.log(Math.sin(squareX) * 10)
+
+        // Update square position at a slower rate
+        squareX += dx * 0.01;
+        squareY += dy * 0.01;
+
+        // Update trail
+        trail.push({x: squareX, y: squareY});
+        if (trail.length > 150) {
+            trail.shift();
+            segmentTracker++
+        }
+        //Todo: reset after Segment Length.
+        if (segmentTracker > 10000) segmentTracker = 0;
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        update();
+
+
+        // if (segmentTracker > trailSegmentLength){
+        //     segmentTracker = 0;
+        // }
+
+
+        // Draw vector trail
+        if (trail.length > 1) {
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(trail[0].x, trail[0].y);
+            for (let i = 1; i < trail.length; i++) {
+                if (((i - segmentTracker) % trailSegmentLength) >= trailSegmentLength/2) {
+                    ctx.lineTo(trail[i].x, trail[i].y);
+                } else {
+                    ctx.moveTo(trail[i].x, trail[i].y);
+
+                }
+
+
+            }
+            ctx.stroke();
+        }
+
+        // Draw rotating square
+        ctx.save();
+        ctx.translate(squareX, squareY);
+        ctx.rotate(squareAngle);
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(-squareSize / 2, -squareSize / 2, squareSize, squareSize);
+        ctx.restore();
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Platinen</title>
+</head>
+<body>
+<style>
+
+  html, body {
+    font-family: system-ui;
+    background: #FFF;
+    color: black;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+  }
+
+  img
+  {
+    position: absolute;
+    opacity: 40%;
+  }
+
+  ::selection {
+    background-color: none;
+  }
+
+  .form {
+    animation: pendel 2s infinite ease-in-out alternate;
+    margin-top: 20px;
+    height: 400px;
+    position: absolute;
+    transform-origin: 50% 0%;
+    left: -10%;
+  }
+
+</style>
+
+<div class="cable">
+</div>
+<div class="cable-highlight">
+</div>
+<p id="counter"></p>
+
+<script>
+
+  document.body.addEventListener("click", function (event) {
+
+    for (i=0; i< 20; i++){
+    screenWidth = window.screen.width;
+    chairs = document.getElementsByClassName("chair");
+    var chair = document.createElement("img");
+    chair.className = "chair";
+
+    chair.style.left = (Math.floor(Math.random() * window.screen.width/2) + window.screen.width/4) + "px";
+    chair.style.top = (Math.floor(Math.random() * window.screen.height/4) + window.screen.height/6) + "px";
+    //chair.style.animationDelay = Math.random() * 2 + "s";
+      chair.style.rotate = Math.floor(Math.random() * 4) * 0.25 + "turn";
+
+    randomPlatine = Math.floor(Math.random() * 5) + 2;
+    chair.src = "media/platinenzeug/platine" + randomPlatine + ".svg";
+    // chair.onclick = function() {
+    //     this.remove();
+    // };
+    document.body.appendChild(chair);
+    }
+  });
+
+  // Call the function when the page has finished loading
+  window.addEventListener("load", translateChairs);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life is Boring</title>
+</head>
+<body>
+<style>
+
+    html, body {
+        font-family: system-ui;
+        background: #FFF;
+        color: black;
+        overflow: hidden;
+        height: 100%;
+        position: relative;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    ::selection {
+        background-color: none;
+    }
+
+    h1 {
+        position: absolute;
+        top: 10%;
+        left: 20px;
+    }
+
+    .screen {
+        animation: zoom 20s ease-out;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        overflow: auto;
+        position: fixed;
+        right: 0;
+        top: 0;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    @keyframes zoom {
+        0% {
+            width: 100vmax;
+        }
+        100% {
+            width: 200vmax;
+        }
+    }
+</style>
+<script src="../global.js"></script>
+<h1>Life is Boring. There is nothing left to explore.</h1>
+
+<script>
+    var number = 1;
+    document.body.addEventListener("click", function (event) {
+        if (number >= 8) next()
+        var screen = document.createElement("img")
+        screen.className = "screen"
+        screen.src = "img/" + number + ".jpeg"
+        document.body.appendChild(screen)
+        number++
+    });
+
+</script>
+
+</body>
+</html>
