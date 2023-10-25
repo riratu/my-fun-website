@@ -1,2 +1,2 @@
 # website
-My personal Website wich is a bit more like a webcomic or a game
+My personal website, which is a bit more like a webcomic or a game.
