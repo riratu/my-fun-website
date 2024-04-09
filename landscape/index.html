@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0px;
+            padding: 0px;
+
+        }
+        #grid-container {
+            position: absolute;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            /*z-index: -1;*/
+        }
+
+        .isometric-image {
+            position: absolute;
+            /*width: 300px; !* Adjust the width of your isometric image *!*/
+            /*height: 300px; !* Adjust the height of your isometric image *!*/
+            /*transform: rotateX(45deg) rotateZ(45deg);*/
+            /*transform: translate(-50%, -50%);*/
+            /*margin-top:-150px;*/
+            /*z-index: -1;*/
+            margin-left: -75px;
+        }
+        .isometric-image:nth-child(even)  {
+            /*margin-top: 150px;*/
+            /*margin-left: -150px;*/
+            /*margin-right: -150px;*/
+            /*margin: -150px;*/
+            /*z-index: 1;*/
+
+            /*transform: rotateX(45deg) rotateZ(45deg);*/
+        }
+    </style>
+    <title>Isometric Langscape Image Grid</title>
+</head>
+<body>
+<h3 style="z-index: 100000; position: absolute; background-color: #cccccc"><a href="#" onclick="next()">  NEXT</a></h3>
+<div style="position: absolute; background-color: #cccccc; z-index: 30; width: 30vmax; display:none"><p>
+    <ol>
+    <li><b>generate images</b>
+        with dalle3 with the following promt:
+        <code>cute forrest with "some random things", 3d game isometric on high noon, detailed, black background, black border.</code>
+    repeat many times.
+    </li>
+    <li>make background transparent,  for example with https://www.remove.bg</li>
+    <li>crop transparent pixels and resize to correct format with imagemagick</br>
+        <code>do\
+            convert "$file" -resize 300x -trim -quality 15 -background none "./done/${file%.png}.png"</code>
+
+    </li>
+    <li>arrange the images, for example with javascript to make a landscape</li>
+</ol>
+</p></div>
+<div id="grid-container"></div>
+<script src="script.js"></script>
+<script src="../global.js"></script>
+</body>
+</html>

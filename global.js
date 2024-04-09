@@ -120,6 +120,18 @@ const siteArray = [
         description: "Hello"
     },
     {
+        title: "Relationship",
+        img: "relationship.png",
+        href: "relationship",
+        description: "We get along well"
+    },
+    {
+        title: "Landscape",
+        img: "landscape.png",
+        href: "landscape",
+        description: "mindsweep"
+    },
+    {
         title: "End",
         img: "end.png",
         href: "end",
@@ -129,11 +141,16 @@ const siteArray = [
 
 let url = window.location.href.toString()
 var urlSegments = url.split("/");
-var searchString = urlSegments[urlSegments.length - 2];
-const siteNo = siteArray.findIndex(obj => obj.href === searchString);
+var currentSiteName = urlSegments[urlSegments.length - 2];
+const siteNo = siteArray.findIndex(obj => obj.href === currentSiteName);
 
 maxLevel = localStorage.getItem('level');
 if (siteNo > maxLevel) localStorage.setItem('level', siteNo);
+
+var storedNames = JSON.parse(localStorage.getItem("solvedSites"));
+
+// Check if the Site is already solved
+var siteIsSolved = storedNames != null && storedNames.includes(currentSiteName);
 
 const container = document.body;
 
@@ -146,7 +163,7 @@ document.getElementsByTagName("head")[0].appendChild(link);
 
 const nav = document.createElement("div");
 nav.classList.add("nav")
-nav.innerHTML = `<a id="prev">Back</a> | <a id="index" href="../menu">Menu</a> `
+nav.innerHTML = `<a id="prev">Back</a>`
 container.appendChild(nav);
 
 if (siteNo > 0) {
@@ -154,22 +171,25 @@ if (siteNo > 0) {
     prevElement.href = "../" + siteArray[siteNo - 1].href;
 }
 
-if (siteNo  < maxLevel && siteNo < siteArray.length - 1) {
-    nav.innerHTML += " | "
+//Display the Menu, if the Site is solved
+if (siteIsSolved) {
+    nav.innerHTML += "| <a id=\"index\" href=\"../menu\">Menu</a> | "
 
     nextLink = document.createElement("a");
     nextLink.href = "../" + siteArray[siteNo + 1].href;
     nextLink.textContent = "Forward"
     nav.appendChild(nextLink);
+    nav.style.display = "block";
 }
 
+//Jump tp the next site
 function next() {
-    sites = ["eins", "zwei", "drei"]
-    localStorage.setItem("visitedSites", JSON.stringify(sites));
-    var storedNames = JSON.parse(localStorage.getItem("visitedSites"));
-    console.log(storedNames)
-
-
+    if (!siteIsSolved) {
+        if (storedNames == null) storedNames = []
+        storedNames.push(currentSiteName)
+        localStorage.setItem("solvedSites", JSON.stringify(storedNames));
+        console.log(storedNames)
+    }
     window.location.href = "../" + siteArray[siteNo + 1].href;
 }
 
