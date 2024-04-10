@@ -1,45 +1,55 @@
 let forms = []
 let startX, startY
 //let stepSize = 200
-let formSize = 1000
+let formSize = 4000
 let maxformSteps = 400
-let minFormSteps = 5
+let minFormSteps = 10
 let path = []
-let timeScale = 1
+let timeScale = 2
+let numberOfEdges
+let maxFormNo = 10
 
 let animationFrames = 1560
 
 function setup() {
+    frameRate(40)
+    numberOfEdges = random(3,5)
 
-    let htpHolder = document.getElementById('objectHolder');
+    if (document.getElementById('objectHolder')){
+        let htpHolder = document.getElementById('objectHolder');
+        // Use getComputedStyle to get the actual dimensions of the div
+        let computedStyle = getComputedStyle(htpHolder);
 
-    // Use getComputedStyle to get the actual dimensions of the div
-    let computedStyle = getComputedStyle(htpHolder);
+        // Extract width and height from the computed style, parsing them as integers
+        let w = parseInt(computedStyle.width);
+        let h = parseInt(computedStyle.height);
 
-    // Extract width and height from the computed style, parsing them as integers
-    let w = parseInt(computedStyle.width);
-    let h = parseInt(computedStyle.height);
+        // Create the canvas with the dimensions of the parent div
+        let htpCanvas = createCanvas(w, h);
 
-    // Create the canvas with the dimensions of the parent div
-    let htpCanvas = createCanvas(w, h);
+        htpCanvas.id('ObjHTP24');
+    } else {
+        createCanvas(windowWidth, windowHeight)
+        let w = windowHeight
+        let h = windowWidth
+    }
 
-    htpCanvas.id('ObjHTP24');
     colorMode(HSB, 255)
     angleMode(DEGREES)
     noFill()
 }
 
 function draw() {
-
     clear()
-    background(0, 0)
 
     if (forms.length < 1) {
         for (fcdr = 8; fcdr > 1; fcdr--) {
             createForms(frameCount - (fcdr * 120))
         }
     }
-    if (frameCount % 120 == 0) {
+    if (frameCount % 100 == 0
+        && forms.length <= maxFormNo
+        && frameRate() > 30 ) {
         createForms(frameCount)
     }
     drawForms()
@@ -47,7 +57,6 @@ function draw() {
 
 function createForms(currentFrame) {
     let formSteps = minFormSteps + random(0.5, 1) * random(maxformSteps)
-    let numberOfEdges = 4 // round(random(1)) + 4;
     let newForm = {
         oldForm: createPoints(formSteps, numberOfEdges),
         newForm: createPoints(formSteps, numberOfEdges),
@@ -63,7 +72,7 @@ function drawForms() {
 
     for (let formCount = 0; formCount < forms.length; formCount++) {
         let frame = frameCount - forms[formCount].startFrame;
-        strokeWeight(40 - (frame / animationFrames * 5));
+        strokeWeight(2 - (frame / animationFrames));
 
         if (frame > animationFrames) {
             formEol = true
@@ -79,7 +88,7 @@ function drawForms() {
         rotate(rotationAmount);
 
         // Moving the scaling here so it applies after the translation and rotation
-        scale(frame / animationFrames / timeScale);
+        scale(frame / animationFrames * timeScale);
 
         beginShape();
 
@@ -99,8 +108,8 @@ function drawForms() {
         }
         let animVal = frame / animationFrames;
         let alpha = (animationFrames - frame);
-        stroke(255 - (animVal * 100), 140, alpha, alpha);
-        fill(155 - (animVal * 55), 190, 555, alpha);
+        stroke(255 - (animVal * 100), 130, alpha, alpha);
+        fill(155 - (animVal * 55), 255, 255, alpha);
         endShape(CLOSE);
         pop();
     }
