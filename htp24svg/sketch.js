@@ -2,12 +2,12 @@ let forms = []
 let startX, startY
 //let stepSize = 200
 let formSize = 4000
-let maxformSteps = 400
-let minFormSteps = 10
+let maxformSteps = 1000
+let minFormSteps = 100
 let path = []
 let timeScale = 2
 let numberOfEdges
-let maxFormNo = 10
+let maxFormNo = 30
 
 let animationFrames = 1560
 
@@ -29,7 +29,7 @@ function setup() {
 
         htpCanvas.id('ObjHTP24');
     } else {
-        createCanvas(windowWidth, windowHeight)
+        createCanvas(windowWidth, windowHeight, SVG)
         let w = windowHeight
         let h = windowWidth
     }
@@ -48,8 +48,7 @@ function draw() {
         }
     }
     if (frameCount % 100 == 0
-        && forms.length <= maxFormNo
-        && frameRate() > 30 ) {
+        && forms.length <= maxFormNo) {
         createForms(frameCount)
     }
     drawForms()
@@ -72,8 +71,8 @@ function drawForms() {
 
     for (let formCount = 0; formCount < forms.length; formCount++) {
         let frame = frameCount - forms[formCount].startFrame;
-        strokeWeight(2 - (frame / animationFrames));
-
+        //strokeWeight(round(1 - (frame / animationFrames)));
+        strokeWeight(1)
         if (frame > animationFrames) {
             formEol = true
         }
@@ -108,8 +107,9 @@ function drawForms() {
         }
         let animVal = frame / animationFrames;
         let alpha = (animationFrames - frame);
-        stroke(255 - (animVal * 100), 130, alpha, alpha - 100);
-        fill(155 - (animVal * 55), 255, 255, alpha -100);
+        alphaNormalized = alpha /animationFrames
+        stroke(255 - (animVal * 100), 130, alpha, alphaNormalized * 100);
+        fill(155 - (animVal * 55), 255, 255, alpha);
         endShape(CLOSE);
         pop();
     }
