@@ -92,15 +92,26 @@
         }, 5);
     }
     number = 0;
+
     document.body.addEventListener("click", function (event) {
+
+        canClick = false;
+
+        //console.log(event.target)
+        event.target.disabled = true;
+
+        setTimeout(() => {
+            event.target.disabled = false;
+        }, 1000);
+
         chairs = document.getElementsByClassName("chair");
-        if (number >=10) next();
+        if (number >= 10) next();
         var chair = document.createElement("img");
         chair.className = "chair";
         chair.style.animationDelay = Math.random() * 2 + "s";
         chair.src = "chairlift.png";
         document.body.appendChild(chair);
-        number ++
+        number++;
     });
 
     // Call the function when the page has finished loading
