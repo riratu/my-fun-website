@@ -52,8 +52,7 @@ function draw() {
         ball.strokeWeight = 0
     }
     clear();
-    if (balls >=500) next();
-    console.log(balls)
+    if (balls >=300) next();
 }
 
 function handleHover() {
