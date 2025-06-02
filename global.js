@@ -132,6 +132,12 @@ const siteArray = [
         description: "mindsweep"
     },
     {
+        title: "Happy",
+        img: "happy.png",
+        href: "happy",
+        description: "Those Days"
+    },
+    {
         title: "End",
         img: "end.png",
         href: "end",
