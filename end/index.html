@@ -24,7 +24,14 @@
         <a href="../menu">Here</a> you can see all the Levels again.
     </p>
     <p>
-        If you liked this or feel the urge to contact me, here is my address: <a href="mailto:info@giannihorst.ch">info@giannihorst.ch. Please include the codeword in the mail.</a>
+        If you liked this or feel the urge to contact me, here is my address: <a href="#" id="email-link">info@<span id="domain"></span></a>. Please include the codeword in the mail.
+
+        <script>
+            const domain = window.location.hostname;
+            document.getElementById('domain').textContent = domain;
+            document.getElementById('email-link').href = 'mailto:info@' + domain;
+        </script>
+
     </p>
 </div>
 <script>
