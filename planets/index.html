@@ -18,24 +18,42 @@
     .planets {
         height: 0%;
         position: absolute;
+        opacity: 0;
+    }
+
+    .loader {
+        border: 3px solid #333;
+        border-top: 3px solid lavender;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: absolute;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     @keyframes zoom {
         0% {
             transform: rotate(0deg);
+            opacity: 1;
         }
         60% {
-            opacity: 100%;
+            opacity: 1;
         }
         100% {
-            opacity: 0%;
+            opacity: 0;
             height: 300%;
             transform: rotate(50deg);
         }
     }
+
     a {
         color: lavender;
-    padding: 10px 10px;
+        padding: 10px 10px;
         font-size: 1.5rem;
     }
 </style>
@@ -44,6 +62,7 @@
 <p><a href="#" onclick="next()">next</a></p>
 <script src="../global.js"></script>
 <div class="planetContainer">
+    <div class="loader"></div>
     <img class="planets" src="img/roots.png">
     <img class="planets" src="img/mushrooms1.png">
     <img class="planets" src="img/trees1.png">
@@ -62,20 +81,29 @@
 </div>
 <script>
     const planets = document.getElementsByClassName("planets");
+    const loader = document.querySelector(".loader");
+    let loadedCount = 0;
 
     for (let i = 0; i < planets.length; i++) {
         const planet = planets[i];
         const delay = i * 0.2;
-        planet.addEventListener('load', function () {
-            console.log("loaded")
-        planet.style.animation = "zoom 3s ease-in"
-            planet.style.animationDelay = delay + "s";
-        })
+
+        for (let i = 0; i < planets.length; i++) {
+            const planet = planets[i];
+            const delay = i * 0.2;
+
+            planet.addEventListener('load', function () {
+                loadedCount++;
+                planet.style.animation = "zoom 3s ease-in";
+                planet.style.animationDelay = delay + "s";
+
+                if (loadedCount === planets.length) {
+                    loader.style.display = "none";
+                }
+            });
+        }
+
     }
-
-    document.body.addEventListener("click", function (){
-
-    })
 
 </script>
 </body>
