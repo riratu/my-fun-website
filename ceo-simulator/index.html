@@ -69,7 +69,7 @@
 <script>
   let profit = 0;
   let gameOver = false;
-  const PROFIT_THRESHOLD = 30; // Amount of $$$ needed to become an investor
+  const PROFIT_THRESHOLD = 800; // Amount of $$$ needed to become an investor
   const winThreshold = 30
 
   function updateCounter() {
@@ -115,7 +115,7 @@
       document.getElementById('message').innerText = 'Profit increased!';
     }
     if (profit > winThreshold){
-      endGame('Congratulations, you are rich. I hope you now have the recognition from your parents that you always wanted. By the way: the world is now destroyed. ', false);
+      endGame('Congratulations, you are rich. I hope you now have the recognition from your parents that you always wanted. By the way: the world is now destroyed.', false);
     }
 
   }
@@ -136,7 +136,7 @@
         button.disabled = true;
       });
     }
-    document.getElementById('message').innerHTML += "<a href=\"#\" onclick=\"next()\">next</a";
+    document.getElementById('message').innerHTML += " <a href=\"#\" onclick=\"next()\">next</a";
 
   }
 </script>
