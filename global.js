@@ -138,6 +138,12 @@ const siteArray = [
         description: "Those Days"
     },
     {
+        title: "Awe ",
+        img: "awe.png",
+        href: "awe",
+        description: "You are forgetting something"
+    },
+    {
         title: "End",
         img: "end.png",
         href: "end",
