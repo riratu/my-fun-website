@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEO Simulator</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #counter {
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 24px;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      max-width: 500px;
+    }
+    #investorMessage {
+      margin-top: 20px;
+      font-size: 24px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<h1>CEO Simulator</h1>
+<div id="counter">Profit: 0 $$$</div>
+<div class="button-container" id="ceoButtons">
+  <button id="profitButton" onclick="handleProfitClick()">Make short term profit for shareholders</button>
+  <button onclick="handleOtherClick()">Invest longterm</button>
+  <button onclick="handleOtherClick()">Do the right thing</button>
+</div>
+<div class="button-container" id="investorButtons" style="display: none;">
+  <button onclick="handleMaxProfitInvest()">Invest for max profit</button>
+  <button onclick="handleResponsibleInvest()">Invest responsibly</button>
+</div>
+<div id="investorMessage"></div>
+<div id="message"></div>
+
+<script>
+  let profit = 0;
+  let gameOver = false;
+  const PROFIT_THRESHOLD = 30; // Amount of $$$ needed to become an investor
+  const winThreshold = 30
+
+  function updateCounter() {
+    document.getElementById('counter').innerText = `Profit: ${profit} $$$`;
+  }
+
+  function handleProfitClick() {
+    if (!gameOver) {
+      profit += 1;
+      updateCounter();
+      if (profit >= PROFIT_THRESHOLD) {
+        becomeInvestor();
+      }
+    }
+  }
+
+  function handleOtherClick() {
+    if (!gameOver) {
+      endGame('Based on our analysis, the company\'s current profit margins are below industry benchmarks/historical performance. This indicates a need for a personal change! We need another CEO. Game Over.');
+    }
+  }
+
+  function becomeInvestor() {
+    gameOver = true; // Game over for CEO role
+    document.getElementById('investorMessage').innerText = 'Congratulations, you are an investor now!';
+    document.getElementById('ceoButtons').style.display = 'none';
+    document.getElementById('investorButtons').style.display = 'flex';
+    document.getElementById('message').innerText = ''; // Clear previous game over message
+    gameOver = false; // Reset game over for investor stage
+  }
+
+  function handleResponsibleInvest() {
+    if (!gameOver) {
+      document.getElementById('message').innerText = 'Your friends have now more money. You lose.';
+      endGame('', true);
+    }
+  }
+
+  function handleMaxProfitInvest() {
+    if (!gameOver) {
+      profit += 10; // Example: earn more profit
+      updateCounter();
+      document.getElementById('message').innerText = 'Profit increased!';
+    }
+    if (profit > winThreshold){
+      endGame('Congratulations, you are rich. I hope you now have the recognition from your parents that you always wanted. By the way: the world is now destroyed. ', false);
+    }
+
+  }
+
+  function endGame(msg, isInvestorLoss = false) {
+    gameOver = true;
+    if (msg) {
+      document.getElementById('message').innerText = msg;
+    }
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+      if (!isInvestorLoss || (isInvestorLoss && button.parentElement.id !== 'investorButtons')) {
+        button.disabled = true;
+      }
+    });
+    if (isInvestorLoss) {
+      document.getElementById('investorButtons').querySelectorAll('button').forEach(button => {
+        button.disabled = true;
+      });
+    }
+    document.getElementById('message').innerHTML += "<a href=\"#\" onclick=\"next()\">next</a";
+
+  }
+</script>
+</body>
+</html>

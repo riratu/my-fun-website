@@ -138,6 +138,12 @@ const siteArray = [
         description: "Those Days"
     },
     {
+        title: "CEO",
+        img: "ceo.png",
+        href: "ceo-simulator",
+        description: "You rule the world"
+    },
+    {
         title: "Awe ",
         img: "awe.png",
         href: "awe",
