@@ -37,17 +37,9 @@
     #message {
       margin-top: 20px;
       font-size: 24px;
-      color: red;
       font-weight: bold;
       text-align: center;
       max-width: 500px;
-    }
-    #investorMessage {
-      margin-top: 20px;
-      font-size: 24px;
-      color: green;
-      font-weight: bold;
-      text-align: center;
     }
   </style>
 </head>
@@ -64,7 +56,6 @@
   <button onclick="handleMaxProfitInvest()">Invest for max profit</button>
   <button onclick="handleResponsibleInvest()">Invest responsibly</button>
 </div>
-<div id="investorMessage"></div>
 <div id="message"></div>
 
 <script>
@@ -89,16 +80,15 @@
 
   function handleOtherClick() {
     if (!gameOver) {
-      endGame('Based on our analysis, the company\'s current profit margins are below industry benchmarks/historical performance. This indicates a need for a personal change! We need another CEO. Game Over.');
+      endGame('Based on our analysis, the company\'s current profit margins are below industry benchmarks/historical performance. This indicates a need for a personal change! We need another CEO.');
     }
   }
 
   function becomeInvestor() {
     gameOver = true; // Game over for CEO role
-    document.getElementById('investorMessage').innerText = 'Congratulations, you are an investor now!';
+    document.getElementById('message').innerText = 'Congratulations, you are an investor now!';
     document.getElementById('ceoButtons').style.display = 'none';
     document.getElementById('investorButtons').style.display = 'flex';
-    document.getElementById('message').innerText = ''; // Clear previous game over message
     gameOver = false; // Reset game over for investor stage
   }
 
@@ -116,7 +106,7 @@
       document.getElementById('message').innerText = 'Profit increased!';
     }
     if (profit > winThreshold){
-      endGame('Congratulations, you are rich. I hope you now have the recognition from your parents that you always wanted. By the way: the world is now destroyed.', false);
+      endGame('Congratulations, you are rich. I hope you now have the recognition from your parents that you always wanted.', false);
     }
 
   }

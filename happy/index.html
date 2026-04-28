@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything will be ok</title>
+    <script src="../lib/Tone.js"></script>
+</head>
+<body>
+<main>
+    <div id="content">
+        <button id="tone-play" onclick="toggleSound()">Start Sound</button>
+<a onclick="next()">Next</a>
+    </div>
+
+    <script src="../global.js"></script>
+    <script>
+        document.addEventListener("mousemove", (event) => {
+            const speeed = (1 - event.clientY / window.innerHeight);
+            lfoFilter.frequency.value = speeed * 10;
+            lfoFilter.min = speeed * 10;
+            reverb.roomSize.value = 1 - speeed
+            reverb.wet.value = 0.25 - speeed / 4
+
+            filterMain.frequency.value = (speeed * 5000) + 100
+
+            const lfoSpeed = (event.clientX / window.innerWidth) * 5;
+            lfo1.frequency.value = lfoSpeed;
+
+            const hue = Math.round((event.clientX / window.innerWidth) * 40);
+            const light = Math.round((event.clientY / window.innerHeight) * 70);
+            document.body.style.backgroundColor = `hsl(${hue}, 60%, ${70 - light}%)`
+        });
+
+        const osc1 = new Tone.Oscillator(440, "sine").start();
+        const osc2 = new Tone.Oscillator(330, "sine").start();
+
+        const lfo1 = new Tone.LFO("4n", 200, 800);
+        lfo1.connect(osc1.frequency);
+        lfo1.start();
+
+        const lfo2 = new Tone.LFO(0.8, 100, 500);
+        lfo2.connect(osc2.frequency);
+        lfo2.start();
+
+        const filterMain = new Tone.Filter({
+            type: "lowpass",
+            frequency: 1000,
+            Q: 1,
+        }).toDestination();
+
+        const reverb = new Tone.JCReverb(0.4).connect(filterMain)
+
+        const filter = new Tone.Filter({
+            type: "lowpass",
+            frequency: 1000,
+            Q: 1,
+        }).connect(reverb);
+
+        const lfoFilter = new Tone.LFO(10, 100, 500);
+        lfoFilter.connect(filter.frequency);
+        lfoFilter.start();
+
+        const gain = new Tone.Gain(0.3).connect(filter)
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+
+        Tone.Transport.start();
+
+        function stop() {
+            osc1.stop();
+            osc2.stop();
+            Tone.Transport.stop();
+        };
+
+        function toggleSound() {
+            const context = Tone.getContext();
+            const button = document.getElementById("tone-play")
+            if (Tone.Transport.state === "started" && context.state === "running") {
+                osc1.stop();
+                osc2.stop();
+                lfo1.stop();
+                lfo2.stop();
+                lfoFilter.stop();
+                Tone.Transport.stop();
+                button.innerText = "Start Sound";
+            } else {
+                if (context.state !== "running") {
+                    context.resume();
+                }
+
+                osc1.start();
+                osc2.start();
+                lfo1.start();
+                lfo2.start();
+                lfoFilter.start();
+                Tone.Transport.start();
+                button.innerText = "Stop Sound";
+            }
+        }
+
+    </script>
+</main>
+</body>
+</html>

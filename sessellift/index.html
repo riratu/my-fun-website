@@ -77,7 +77,13 @@
 
             var chairs = document.getElementsByClassName("chair");
 
-            document.getElementById("counter").innerHTML = "Click me " + (11 - number) + " times"
+            if (number == 0){
+                document.getElementById("counter").innerHTML = "Click me"
+            } else if (number > 3) {
+                document.getElementById("counter").innerHTML = "and again"
+            } else {
+                document.getElementById("counter").innerHTML = "again"
+            }
 
             for (let i = 0; i < chairs.length; i++) {
                 let currentPosition = chairs[i].offsetLeft;
