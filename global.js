@@ -150,10 +150,16 @@ const siteArray = [
         description: "You are forgetting something"
     },
     {
-        title: "Idle",
-        img: "idle.png",
-        href: "idle",
+        title: "Eating",
+        img: "eating.png",
+        href: "eating",
         description: "Hardware Stress Test"
+    },
+    {
+        title: "Code Quality",
+        img: "codequality.png",
+        href: "codequality",
+        description: "A Flowchart"
     },
     {
         title: "End",

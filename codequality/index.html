@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise code quality assessment</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-family: monospace;
+            font-size: 16px;
+            background: white;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin: 40px;
+        }
+
+        h1 {
+            font-family: monospace;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 30px 0;
+        }
+
+        .chart-area {
+            position: relative;
+        }
+
+        svg.arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .question {
+            border: 2px solid black;
+            padding: 14px 24px;
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .result {
+            border: 2px solid black;
+            padding: 14px 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .result.bad {
+            background: black;
+            color: white;
+        }
+
+        .result.good {
+            background: white;
+            color: black;
+        }
+
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .arrow-down {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .arrow-down .line {
+            width: 2px;
+            height: 20px;
+            background: black;
+        }
+
+        .arrow-down .label {
+            font-size: 13px;
+            padding: 2px 0;
+        }
+
+        .arrow-down .head {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid black;
+        }
+
+        .next-link {
+            margin-top: 40px;
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<script src="../global.js"></script>
+    <div class="flowchart">
+        <h1>Enterprise code quality assessment</h1>
+
+        <div class="chart-area" id="chart">
+            <svg class="arrows" id="svg"></svg>
+
+            <div class="left-col">
+                <div class="question" id="q0">Have you written the code by yourself?</div>
+
+                <div class="arrow-down">
+                    <div class="line"></div>
+                    <div class="label">yes</div>
+                    <div class="line"></div>
+                    <div class="head"></div>
+                </div>
+
+                <div class="question" id="q1">Was it less than half a year ago?</div>
+
+                <div class="arrow-down">
+                    <div class="line"></div>
+                    <div class="label">yes</div>
+                    <div class="line"></div>
+                    <div class="head"></div>
+                </div>
+
+                <div class="question" id="q2">Have you had no pressure and enough time?</div>
+
+                <div class="arrow-down">
+                    <div class="line"></div>
+                    <div class="label">yes</div>
+                    <div class="line"></div>
+                    <div class="head"></div>
+                </div>
+
+                <div class="question" id="q3">Have you rewritten it at least once?</div>
+
+                <div class="arrow-down">
+                    <div class="line"></div>
+                    <div class="label">yes</div>
+                    <div class="line"></div>
+                    <div class="head"></div>
+                </div>
+
+                <div class="result good" id="good">Good</div>
+            </div>
+
+            <div class="result bad" id="bad" style="position: absolute;">Bad</div>
+        </div>
+
+        <a class="next-link" onclick="next()">next</a>
+    </div>
+
+    <script>
+        function drawArrows() {
+            const chart = document.getElementById('chart');
+            const svg = document.getElementById('svg');
+            const bad = document.getElementById('bad');
+            const questions = [
+                document.getElementById('q0'),
+                document.getElementById('q1'),
+                document.getElementById('q2'),
+                document.getElementById('q3')
+            ];
+
+            const chartRect = chart.getBoundingClientRect();
+            const good = document.getElementById('good');
+            const goodRect = good.getBoundingClientRect();
+            const q0Rect = questions[0].getBoundingClientRect();
+
+            // position bad box: right of the questions, same row as good
+            const rightX = q0Rect.right - chartRect.left + 100;
+            const goodTopY = goodRect.top - chartRect.top;
+            bad.style.left = rightX + 'px';
+            bad.style.top = goodTopY + 'px';
+
+            const badRect = bad.getBoundingClientRect();
+            const badCenterX = badRect.left + badRect.width / 2 - chartRect.left;
+            const badTopY = badRect.top - chartRect.top;
+
+            svg.setAttribute('width', chart.offsetWidth + 80);
+            svg.setAttribute('height', chart.offsetHeight);
+            svg.innerHTML = '';
+
+            // arrowhead marker
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+            marker.setAttribute('id', 'arrowhead');
+            marker.setAttribute('markerWidth', '8');
+            marker.setAttribute('markerHeight', '6');
+            marker.setAttribute('refX', '8');
+            marker.setAttribute('refY', '3');
+            marker.setAttribute('orient', 'auto');
+            const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '0 0, 8 3, 0 6');
+            polygon.setAttribute('fill', 'black');
+            marker.appendChild(polygon);
+            defs.appendChild(marker);
+            svg.appendChild(defs);
+
+            // right edge: how far out each curve goes (staggered so they don't overlap)
+            const maxBulge = 40;
+
+            questions.forEach(function(q, i) {
+                const qRect = q.getBoundingClientRect();
+                const startX = qRect.right - chartRect.left;
+                const startY = qRect.top + qRect.height / 2 - chartRect.top;
+                const endX = badCenterX;
+                const endY = badTopY;
+
+                // stagger the curves: earlier questions bulge further right
+                const bulge = startX + maxBulge + (questions.length - 1 - i) * 20;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d',
+                    'M ' + startX + ' ' + startY +
+                    ' C ' + bulge + ' ' + startY +
+                    ' ' + bulge + ' ' + endY +
+                    ' ' + endX + ' ' + endY
+                );
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', 'black');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('marker-end', 'url(#arrowhead)');
+                svg.appendChild(path);
+
+                // "no" label near the start of the curve
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', startX + 8);
+                label.setAttribute('y', startY - 6);
+                label.setAttribute('font-family', 'monospace');
+                label.setAttribute('font-size', '13');
+                label.textContent = 'no';
+                svg.appendChild(label);
+            });
+        }
+
+        window.addEventListener('load', drawArrows);
+        window.addEventListener('resize', drawArrows);
+    </script>
+</body>
+</html>
