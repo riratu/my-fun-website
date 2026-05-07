@@ -47,7 +47,7 @@
         }
 
         .question {
-            border: 2px solid black;
+            border: 0.5px solid darkgrey;
             padding: 14px 24px;
             text-align: center;
             max-width: 300px;
@@ -213,7 +213,7 @@
             svg.appendChild(defs);
 
             // right edge: how far out each curve goes (staggered so they don't overlap)
-            const maxBulge = 40;
+            const maxBulge = 80;
 
             questions.forEach(function(q, i) {
                 const qRect = q.getBoundingClientRect();
@@ -234,7 +234,7 @@
                 );
                 path.setAttribute('fill', 'none');
                 path.setAttribute('stroke', 'black');
-                path.setAttribute('stroke-width', '2');
+                path.setAttribute('stroke-width', '1');
                 path.setAttribute('marker-end', 'url(#arrowhead)');
                 svg.appendChild(path);
 

@@ -162,6 +162,18 @@ const siteArray = [
         description: "A Flowchart"
     },
     {
+        title: "CV",
+        img: "cv.png",
+        href: "cv",
+        description: "Hire me"
+    },
+    {
+        title: "Jailbreak",
+        img: "jailbreak.png",
+        href: "jailbreak",
+        description: "Trust no bot"
+    },
+    {
         title: "End",
         img: "end.png",
         href: "end",
