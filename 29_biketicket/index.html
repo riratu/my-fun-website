@@ -6,8 +6,8 @@
     <title>How to book a bike ticket from Switzerland to Italy</title>
     <style>
         body {
-            margin: 0;
-            padding: 40px 20px 80px 20px;
+            margin: 40px 20px 80px 20px;
+            padding: 0;
             min-height: 100vh;
             font-family: monospace;
             font-size: 16px;
@@ -108,7 +108,7 @@
         }
 
         .continue {
-            display: inline-block;
+            display: block;
             margin-top: 12px;
             text-decoration: underline;
             color: blue;
@@ -158,7 +158,7 @@
             <div class="connector"></div>
             <div class="step-title">Search for a connection with a bike</div>
             <div class="step-body">
-                Go to sbb.ch. Enter your route. Find some nice fast connections.
+                Go to sbb.ch. Enter your route. Find some nice fast connections. But you can not book bike tickets there for international travels.
                 <div class="continue" data-next="2">continue</div>
             </div>
         </div>
@@ -168,7 +168,8 @@
             <div class="connector"></div>
             <div class="step-title">Find the bike filter</div>
             <div class="step-body">
-                The bike option is not on the page where you book tickets. Look around. Find it under "more options" after some searching.
+                Go to trenitalia.it. The bike option is not on the page where you book tickets. Look around. Find it under "more options" when you go to another booking page. After some searching.
+                Don't forget to add a bike ticket at the end, otherwise you have to refund the ticket and get a new one. You can't just buy a bike ticket.
                 <div class="continue" data-next="3">continue</div>
             </div>
         </div>
@@ -178,8 +179,7 @@
             <div class="connector"></div>
             <div class="step-title">Find great connections</div>
             <div class="step-body">
-                The connections look even better now. Much more options. Select one, choose a seat, proceed through the entire booking flow. At the very end: "No bike places available." The bike filter goes missing when you change the time.
-                if you forget to add a bike ticket at the end, you have to refund the ticket and get a new one. you can't just buy a bike ticket.
+                Select a connection, choose a seat, proceed through the entire booking flow. At the very end you don't see the option to add a bike. The bike filter goes missing when you change the time.
                 <div class="continue" data-next="4">continue</div>
             </div>
         </div>
@@ -209,7 +209,7 @@
             <div class="connector"></div>
             <div class="step-title">Find a better connection on Trenitalia</div>
             <div class="step-body">
-                On the Trenitalia website you find a better connection anyway. But you can't book it there. Turns out you need another website for this specific part of the journey. You need to use the Trenord website.
+                On the Trenitalia website you find a better connection anyway. But when you click on it there is a message that you can not book it on this channel. Turns out you need another website for this specific part of the journey. You need to use the Trenord website.
                 <div class="continue" data-next="7">continue</div>
             </div>
         </div>
@@ -219,7 +219,7 @@
             <div class="connector"></div>
             <div class="step-title">Create an account on Trenord</div>
             <div class="step-body">
-                Register on Trenord. You have to enter your country of residence and place of birth. The dropdown only lists Italian cities. There is no option for another country.
+                Select a ticket on Trenord. You have to register and enter your country of residence and place of birth. The dropdown only lists Italian cities. There is no option for another country.
                 <div class="continue" data-next="8">continue</div>
             </div>
         </div>
@@ -229,7 +229,7 @@
             <div class="connector"></div>
             <div class="step-title">Ask a friend from Italy</div>
             <div class="step-body">
-                You write a friend who lives in Italy. He says you need to type <b>ESTERO</b> in the field to select a foreign country. This is not documented anywhere.
+                You write a friend who lives in Italy. He says you need to select <b>ESTERO</b> which is hidden in the list with Italian regions to select a foreign country. This is not documented anywhere.
                 <div class="continue" data-next="9">continue</div>
             </div>
         </div>
@@ -239,7 +239,7 @@
             <div class="connector"></div>
             <div class="step-title">Calculate your Codice Fiscale</div>
             <div class="step-body">
-                Trenord requires your Italian fiscal code (Codice Fiscale). You are not Italian. You don't have one. But you must enter one. It is <a href="https://en.wikipedia.org/wiki/Italian_fiscal_code" target="_blank">derived from your name, birth date, gender, and place of birth</a>. Ask an AI to generate it for you. Tell it to use code to verify the check character (Pr&uuml;fziffer), because otherwise it will be wrong.
+                Trenord requires your Italian fiscal code (Codice Fiscale). You are not Italian. You don't have one. But you must enter one. It is <a href="https://en.wikipedia.org/wiki/Italian_fiscal_code" target="_blank">derived from your name, birth date, gender, and place of birth</a>. Ask an AI to generate it for you. Tell it to use code to verify the check character, because otherwise it will be wrong.
                 <div class="continue" data-next="10">continue</div>
             </div>
         </div>
@@ -249,7 +249,7 @@
             <div class="connector"></div>
             <div class="step-title">Enter your address</div>
             <div class="step-body">
-                You can't choose an address in a foreign country, you have to choose a city in Italy. Just entering an Italian city is probably illegal, but would hypothetically work.
+                You can't choose an address in a foreign country, you have to choose a city in Italy. Just entering an Italian city is probably illegal, but would (of course strictly hypothetically) work.
                 <div class="continue" data-next="11">continue</div>
             </div>
         </div>
