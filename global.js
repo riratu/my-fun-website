@@ -153,7 +153,7 @@ const siteArray = [
         title: "Eating",
         img: "eating.png",
         href: "eating",
-        description: "Hardware Stress Test"
+        description: "Hardware Eating Site"
     },
     {
         title: "Code Quality",
@@ -172,6 +172,12 @@ const siteArray = [
         img: "jailbreak.png",
         href: "jailbreak",
         description: "Trust no bot"
+    },
+    {
+        title: "Bike Ticket",
+        img: "biketicket.png",
+        href: "biketicket",
+        description: "It is this simple"
     },
     {
         title: "End",

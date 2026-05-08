@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to book a bike ticket from Switzerland to Italy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px 80px 20px;
+            min-height: 100vh;
+            font-family: monospace;
+            font-size: 16px;
+            background: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .guide {
+            max-width: 560px;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: monospace;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+        }
+
+        .subtitle {
+            color: #999;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .step {
+            margin-bottom: 32px;
+            position: relative;
+            padding-left: 44px;
+            display: none;
+        }
+
+        .step.visible {
+            display: block;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            border: 1.5px solid black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            line-height: 28px;
+        }
+
+        .step-body {
+            color: #444;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .connector {
+            position: absolute;
+            left: 14px;
+            top: 30px;
+            width: 1.5px;
+            background: black;
+            bottom: -32px;
+        }
+
+        .conclusion {
+            border-top: 1.5px solid black;
+            padding-top: 20px;
+            margin-top: 40px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .conclusion.visible {
+            display: block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #eee;
+            margin-bottom: 40px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: black;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .continue {
+            display: inline-block;
+            margin-top: 12px;
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .continue:hover {
+            color: black;
+        }
+
+        a.next-link {
+            display: none;
+            margin-top: 40px;
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        a.next-link.visible {
+            display: block;
+        }
+
+        .tip {
+            background: #f5f5f5;
+            padding: 8px 12px;
+            margin-top: 6px;
+            font-size: 13px;
+            border-left: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+<script src="../global.js"></script>
+    <div class="guide">
+        <h1>How to book a bike ticket from Switzerland to Italy</h1>
+        <div class="subtitle">An easy-to-follow guide. Estimated time: 2 evenings.</div>
+
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+        <div class="step" id="s1">
+            <div class="step-number">1</div>
+            <div class="connector"></div>
+            <div class="step-title">Search for a connection with a bike</div>
+            <div class="step-body">
+                Go to sbb.ch. Enter your route. Find some nice fast connections.
+                <div class="continue" data-next="2">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s2">
+            <div class="step-number">2</div>
+            <div class="connector"></div>
+            <div class="step-title">Find the bike filter</div>
+            <div class="step-body">
+                The bike option is not on the page where you book tickets. Look around. Find it under "more options" after some searching.
+                <div class="continue" data-next="3">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s3">
+            <div class="step-number">3</div>
+            <div class="connector"></div>
+            <div class="step-title">Find great connections</div>
+            <div class="step-body">
+                The connections look even better now. Much more options. Select one, choose a seat, proceed through the entire booking flow. At the very end: "No bike places available." The bike filter goes missing when you change the time.
+                if you forget to add a bike ticket at the end, you have to refund the ticket and get a new one. you can't just buy a bike ticket.
+                <div class="continue" data-next="4">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s4">
+            <div class="step-number">4</div>
+            <div class="connector"></div>
+            <div class="step-title">Re-add the bike filter and try again</div>
+            <div class="step-body">
+                Go back. Re-add the bike. Find a connection. Proceed to payment. Enter your Halbtax. It asks for a subscription number. The number printed on your Halbtax (Half Fare Card) does not fit into the field. In a forum post you find that you have to enter <b>SWISSPA</b> followed by the number. But not for trains that are completely in Switzerland. Only for the international part. For domestic Swiss trains you can't enter the Halbtax at all.
+                <div class="continue" data-next="5">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s5">
+            <div class="step-number">5</div>
+            <div class="connector"></div>
+            <div class="step-title">Go to the ticket office</div>
+            <div class="step-body">
+                You give up on the website. Go to the SBB ticket office in person. The person at the counter tells you they cannot book bike tickets for trains in Italy. They suggest you try the Trenitalia website.
+                <div class="continue" data-next="6">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s6">
+            <div class="step-number">6</div>
+            <div class="connector"></div>
+            <div class="step-title">Find a better connection on Trenitalia</div>
+            <div class="step-body">
+                On the Trenitalia website you find a better connection anyway. But you can't book it there. Turns out you need another website for this specific part of the journey. You need to use the Trenord website.
+                <div class="continue" data-next="7">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s7">
+            <div class="step-number">7</div>
+            <div class="connector"></div>
+            <div class="step-title">Create an account on Trenord</div>
+            <div class="step-body">
+                Register on Trenord. You have to enter your country of residence and place of birth. The dropdown only lists Italian cities. There is no option for another country.
+                <div class="continue" data-next="8">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s8">
+            <div class="step-number">8</div>
+            <div class="connector"></div>
+            <div class="step-title">Ask a friend from Italy</div>
+            <div class="step-body">
+                You write a friend who lives in Italy. He says you need to type <b>ESTERO</b> in the field to select a foreign country. This is not documented anywhere.
+                <div class="continue" data-next="9">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s9">
+            <div class="step-number">9</div>
+            <div class="connector"></div>
+            <div class="step-title">Calculate your Codice Fiscale</div>
+            <div class="step-body">
+                Trenord requires your Italian fiscal code (Codice Fiscale). You are not Italian. You don't have one. But you must enter one. It is <a href="https://en.wikipedia.org/wiki/Italian_fiscal_code" target="_blank">derived from your name, birth date, gender, and place of birth</a>. Ask an AI to generate it for you. Tell it to use code to verify the check character (Pr&uuml;fziffer), because otherwise it will be wrong.
+                <div class="continue" data-next="10">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s10">
+            <div class="step-number">10</div>
+            <div class="connector"></div>
+            <div class="step-title">Enter your address</div>
+            <div class="step-body">
+                You can't choose an address in a foreign country, you have to choose a city in Italy. Just entering an Italian city is probably illegal, but would hypothetically work.
+                <div class="continue" data-next="11">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s11">
+            <div class="step-number">11</div>
+            <div class="connector"></div>
+            <div class="step-title">Download the Trenord app</div>
+            <div class="step-body">
+                If you book via the website, they will ship you a physical card by mail. To Italy. Where you don't live. Download the Trenord app instead.
+                <div class="continue" data-next="12">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s12">
+            <div class="step-number">12</div>
+            <div class="connector"></div>
+            <div class="step-title">Try to pay</div>
+            <div class="step-body">
+                Select "pay with credit card." The payment is declined. You are sent back to the homepage. All your data is gone. Enter everything again.
+                <div class="continue" data-next="13">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s13">
+            <div class="step-number">13</div>
+            <div class="connector"></div>
+            <div class="step-title">Try to pay again (x4)</div>
+            <div class="step-body">
+                Try credit card again. Declined. Try PayPal. Declined. Each time you are sent back to the homepage.
+                <div class="tip">Tip: Only select a bike, not the travelers. This way you don't have to re-enter the birthdate for each person every time through the cumbersome interface.</div>
+                <div class="continue" data-next="14">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s14">
+            <div class="step-number">14</div>
+            <div class="connector"></div>
+            <div class="step-title">Payment works</div>
+            <div class="step-body">
+                One of the attempts finally goes through. Now do it again, this time with both travelers and the additional bike.
+                <div class="continue" data-next="15">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s15">
+            <div class="step-number">15</div>
+            <div class="connector"></div>
+            <div class="step-title">Realise you selected the wrong date</div>
+            <div class="step-body">
+                You purchased tickets for today instead of your travel date. The tickets are non-refundable and the date cannot be changed.
+                <div class="continue" data-next="16">continue</div>
+            </div>
+        </div>
+
+        <div class="step" id="s16">
+            <div class="step-number">16</div>
+            <div class="step-title">Purchase the tickets again</div>
+            <div class="step-body">
+                Buy the same tickets again, for the correct date this time.
+                <div class="continue" id="finish">continue</div>
+            </div>
+        </div>
+
+        <div class="conclusion" id="conclusion">
+            That's it. It is this simple.
+        </div>
+
+        <a class="next-link" id="next-link" onclick="next()">next</a>
+    </div>
+
+    <script>
+        var current = 0;
+        var totalSteps = 16;
+        var progress = document.getElementById('progress');
+
+        function showStep(n) {
+            var step = document.getElementById('s' + n);
+            if (!step) return;
+            step.classList.add('visible');
+            current = n;
+            progress.style.width = ((n / totalSteps) * 100) + '%';
+            step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // show first step
+        showStep(1);
+
+        // handle continue clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('continue')) {
+                var nextStep = e.target.getAttribute('data-next');
+                e.target.style.display = 'none';
+                if (nextStep) {
+                    showStep(parseInt(nextStep));
+                } else if (e.target.id === 'finish') {
+                    e.target.style.display = 'none';
+                    progress.style.width = '100%';
+                    document.getElementById('conclusion').classList.add('visible');
+                    document.getElementById('next-link').classList.add('visible');
+                    document.getElementById('conclusion').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
