@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: white;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .text {
+    max-width: 500px;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: black;
+    text-align: center;
+  }
+  button, .link {
+    margin-top: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 5px;
+  }
+  .link {
+    color: black;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .spinner {
+    margin: 30px auto 0;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #ccc;
+    border-top-color: black;
+    border-radius: 50%;
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div id="intro" class="text">
+  This page is designed to give you a break from your life, expectations and everything.
+  <br>
+  <button onclick="startBreak()">start break</button>
+</div>
+
+<div id="breaking" class="text hidden">
+  break in progress
+  <div class="spinner"></div>
+  <br>
+  <button onclick="stopBreak()">finish break</button>
+</div>
+
+<div id="done" class="text hidden">
+  I hope it helped.
+  <br>
+  <button onclick="startBreak()">take another break</button>
+  <br>
+  <button class="link" onclick="next()">next</button>
+</div>
+
+<script src="../global.js"></script>
+<script>
+function startBreak() {
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("breaking").classList.remove("hidden");
+  document.body.style.background = "lightgreen";
+}
+function stopBreak() {
+  document.getElementById("breaking").classList.add("hidden");
+  document.getElementById("done").classList.remove("hidden");
+  document.body.style.background = "white";
+}
+</script>
+</body>
+</html>
