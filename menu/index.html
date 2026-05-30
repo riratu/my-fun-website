@@ -62,10 +62,35 @@
     .nav {
         display: none;
     }
+
+    .card {
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+        margin: 10px;
+        font-family: "Helvetica Neue", sans-serif;
+        color: darkslategray;
+    }
+
+    .card-title {
+        font-weight: bold;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    .card-description {
+        font-size: 12px;
+        opacity: 0.7;
+    }
+
+    .card-date {
+        font-size: 11px;
+        opacity: 0.5;
+    }
 </style>
 <body>
 <script src="../global.js"></script>
-<h1>This is the<br>very good<br>Art Exhibition</h1>
+<h1><a href="../" style="text-decoration:none;color:inherit;">This is the<br>very good<br>Art Exhibition</a></h1>
 <div id="image-container"></div>
 <script>
 
@@ -96,7 +121,28 @@
         imageElement.alt = imageData.title;
         imageElement.title = imageData.description;
 
-        imageContainer.appendChild(anchorElement);
+        const card = document.createElement("div");
+        card.className = "card";
+        card.appendChild(anchorElement);
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = imageData.title;
+        card.appendChild(title);
+
+        const desc = document.createElement("div");
+        desc.className = "card-description";
+        desc.textContent = imageData.description;
+        card.appendChild(desc);
+
+        if (imageData.created) {
+            const date = document.createElement("div");
+            date.className = "card-date";
+            date.textContent = imageData.created;
+            card.appendChild(date);
+        }
+
+        imageContainer.appendChild(card);
         i ++
     });
 

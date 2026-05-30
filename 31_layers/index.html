@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Click Simulator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: monospace;
+            font-size: 16px;
+            height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            padding: 0 0 12px;
+            flex-shrink: 0;
+            font-family: monospace;
+        }
+
+        .grid {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 3px;
+            flex: 1;
+            min-height: 0;
+            align-content: flex-start;
+        }
+
+        .block {
+            display: none;
+            width: 200px;
+            height: px;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: background 1.35s;
+        }
+
+        .block.visible {
+            display: flex;
+            flex-direction: column;
+            animation: dropIn 0.2s ease-out;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+            margin-bottom: 6px;
+        }
+
+        .block.current {
+            background: #1e1e1e;
+        }
+
+        .block:hover {
+            background: #1a1a1a;
+        }
+
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(-14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .block-num {
+            color: #555;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .block-title {
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .block-desc {
+            font-size: 11px;
+            line-height: 1.4;
+            overflow: hidden;
+        }
+
+        .block.current .block-num { color: #888; }
+        .block.current .block-title { color: #ccc; }
+        .block.current .block-desc { color: #777; }
+
+        .tech {
+            color: #444;
+            font-size: 10px;
+        }
+
+        .link {
+            display: inline-block;
+            text-decoration: underline;
+            color: #888;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .link:hover {
+            color: #fff;
+        }
+
+        @media (max-width: 640px) {
+            .block {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<script src="../global.js"></script>
+
+    <div class="top-bar">
+        <span class="link" id="cont">continue</span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <script>
+        var steps = [
+            { t: "Mechanical switch", d: "A tiny metal dome under the button bends down and touches a contact." },
+            { t: "Debounce", d: "A small chip in the mouse waits a moment to make sure it was a real press." },
+            { t: "HID report", d: "The chip builds a tiny message saying \"left button is down.\"" },
+            { t: "USB signaling", d: "The message travels as electrical pulses through the mouse cable." },
+            { t: "Host controller", d: "A chip on the computer's mainboard catches the pulses." },
+            { t: "DMA to RAM", d: "The message is dropped straight into memory without bothering the processor." },
+            { t: "IRQ", d: "That chip pokes the processor and says \"hey, something arrived.\"" },
+            { t: "Context switch", d: "The processor stops what it was doing and looks at the new message." },
+            { t: "Device driver", d: "A small piece of system software reads it and says \"this is a mouse click.\"" },
+            { t: "Input subsystem", d: "The system rewrites it into a standard form any program can understand." },
+            { t: "Compositor", d: "The window manager checks which window sits under the cursor." },
+            { t: "IPC", d: "The click is passed to that window's program, for example the browser." },
+            { t: "Event loop", d: "The browser notices the new message in its inbox." },
+            { t: "Process routing", d: "It figures out which tab and which part of the page was hit." },
+            { t: "Renderer process", d: "The click is sent to the part of the browser that draws that page." },
+            { t: "Task queue", d: "The click joins a line of tasks waiting to be handled." },
+            { t: "Hit testing", d: "The browser checks exactly which element on the page is under the cursor." },
+            { t: "Capture phase", d: "The click signal walks from the page root down to that element." },
+            { t: "Event listener", d: "Any instructions attached to that element start running." },
+            { t: "Bubble phase", d: "The click then bubbles back up through the surrounding elements." },
+            { t: "JS execution", d: "The website's own script does its thing: change text, load data, play sound." },
+            { t: "Invalidation", d: "Anything that changed on the page is flagged as \"needs redrawing.\"" },
+            { t: "Style / layout / reflow", d: "Sizes, positions, and colors are worked out again for those parts." },
+            { t: "Display list", d: "The browser writes down step-by-step drawing instructions." },
+            { t: "GPU command buffer", d: "Those instructions are sent to the graphics chip." },
+            { t: "Rasterization", d: "The graphics chip paints millions of dots in parallel." },
+            { t: "Compositing", d: "All the layers of the page are combined into one final picture." },
+            { t: "Frame buffer", d: "The finished image is placed in the graphics card's memory." },
+            { t: "VSync", d: "It waits for the monitor to say \"ready for the next image.\"" },
+            { t: "Scanout", d: "The image is streamed through the cable to the screen." },
+            { t: "Sub-pixels", d: "Tiny dots on the screen change color and brightness." },
+            { t: "Retina", d: "Light reaches your eye and you see the click happen." },
+            { t: "finished", d: "<span class=\"link\" id=\"nextLink\">next</span>", next: true }
+        ];
+
+        var totalSteps = steps.length;
+        var current = 0;
+        var revealed = 0;
+        var grid = document.getElementById('grid');
+        var cont = document.getElementById('cont');
+
+        var blocks = [];
+        for (var i = 0; i < totalSteps; i++) {
+            var el = document.createElement('div');
+            el.className = 'block';
+            el.setAttribute('data-i', i);
+            el.innerHTML = '<div class="block-header"><span class="block-num">' + String(i + 1).padStart(2, '0') + '</span><span class="block-title">' + steps[i].t + '</span></div><div class="block-desc">' + steps[i].d + '</div>';
+            grid.appendChild(el);
+            blocks.push(el);
+        }
+
+        function showDetail(i) {
+            for (var j = 0; j < blocks.length; j++) {
+                blocks[j].classList.remove('current');
+            }
+            blocks[i].classList.add('current');
+            current = i;
+        }
+
+        function revealStep(i) {
+            if (i >= totalSteps) return;
+            blocks[i].classList.add('visible');
+            revealed = i + 1;
+            showDetail(i);
+            if (revealed >= totalSteps) {
+                cont.style.display = 'none';
+            }
+        }
+
+        function advance() {
+            if (revealed >= totalSteps) return;
+            revealStep(revealed);
+        }
+
+        cont.addEventListener('click', advance);
+
+        grid.addEventListener('click', function(e) {
+            if (e.target.id === 'nextLink') {
+                next();
+                return;
+            }
+            var block = e.target.closest('.block');
+            if (block && block.classList.contains('visible')) {
+                var idx = parseInt(block.getAttribute('data-i'));
+                showDetail(idx);
+            }
+        });
+
+        revealStep(0);
+    </script>
+</body>
+</html>
