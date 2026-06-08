@@ -13,14 +13,12 @@ if (!siteArray) {
     xhr.send();
     siteArray = JSON.parse(xhr.responseText);
 }
+siteArray = siteArray.filter(s => !s.hidden);
 
 let url = window.location.href.toString()
 var urlSegments = url.split("/");
 var currentSiteName = urlSegments[urlSegments.length - 2];
 const siteNo = siteArray.findIndex(obj => obj.href === currentSiteName);
-
-maxLevel = localStorage.getItem('level');
-if (siteNo > maxLevel) localStorage.setItem('level', siteNo);
 
 var storedNames = JSON.parse(localStorage.getItem("solvedSites"));
 

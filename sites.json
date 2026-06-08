@@ -14,6 +14,107 @@
         "created": ""
     },
     {
+        "title": "Buy My Life",
+        "img": "life.png",
+        "href": "35_life",
+        "description": "Shop",
+        "created": "2026-06-08"
+    },
+    {
+        "title": "Open Letter",
+        "img": "letter.png",
+        "href": "34_letter",
+        "description": "Dear Dieter Meyer",
+        "created": "2026-05-30",
+        "hidden": true
+    },
+    {
+        "title": "Break",
+        "img": "break.png",
+        "href": "33_break",
+        "description": "Take a break",
+        "created": "2026-05-30"
+    },
+    {
+        "title": "Apple",
+        "img": "apple.png",
+        "href": "32_apple",
+        "description": "An Artwork",
+        "created": "2026-05-30"
+    },
+    {
+        "title": "Layers",
+        "img": "layers.png",
+        "href": "31_layers",
+        "description": "From Sand to Click",
+        "created": "2026-05-19",
+        "hidden": true
+    },
+    {
+        "title": "Bike Ticket",
+        "img": "biketicket.png",
+        "href": "29_biketicket",
+        "description": "It is this simple",
+        "created": "2026-05-08"
+    },
+    {
+        "title": "CV",
+        "img": "cv.png",
+        "href": "27_cv",
+        "description": "Hire me",
+        "created": "2026-05-07",
+        "hidden": true
+    },
+    {
+        "title": "Jailbreak",
+        "img": "jailbreak.png",
+        "href": "28_jailbreak",
+        "description": "Trust no bot",
+        "created": "2026-05-07"
+    },
+    {
+        "title": "Happy",
+        "img": "happy.png",
+        "href": "22_happy",
+        "description": "Those Days",
+        "created": "2026-04-28"
+    },
+    {
+        "title": "Eating",
+        "img": "eating.png",
+        "href": "25_eating",
+        "description": "Hardware Eating Site",
+        "created": "2026-04-28"
+    },
+    {
+        "title": "Code Quality",
+        "img": "codequality.png",
+        "href": "26_codequality",
+        "description": "A Flowchart",
+        "created": "2026-04-28"
+    },
+    {
+        "title": "CEO",
+        "img": "ceo.png",
+        "href": "23_ceo-simulator",
+        "description": "You rule the world",
+        "created": "2025-10-09"
+    },
+    {
+        "title": "Awe ",
+        "img": "awe.png",
+        "href": "24_awe",
+        "description": "You are forgetting something",
+        "created": "2025-10-09"
+    },
+    {
+        "title": "Landscape",
+        "img": "landscape.png",
+        "href": "21_landscape",
+        "description": "mindsweep",
+        "created": "2024-04-09"
+    },
+    {
         "title": "Nothing",
         "img": "nonexisting.png",
         "href": "02_nonexisting",
@@ -147,93 +248,9 @@
         "created":""
     },
     {
-        "title": "Landscape",
-        "img": "landscape.png",
-        "href": "21_landscape",
-        "description": "mindsweep",
-        "created": "2024-04-09"
-    },
-    {
-        "title": "Happy",
-        "img": "happy.png",
-        "href": "22_happy",
-        "description": "Those Days",
-        "created": "2026-04-28"
-    },
-    {
-        "title": "CEO",
-        "img": "ceo.png",
-        "href": "23_ceo-simulator",
-        "description": "You rule the world",
-        "created": "2025-10-09"
-    },
-    {
-        "title": "Awe ",
-        "img": "awe.png",
-        "href": "24_awe",
-        "description": "You are forgetting something",
-        "created": "2025-10-09"
-    },
-    {
-        "title": "Eating",
-        "img": "eating.png",
-        "href": "25_eating",
-        "description": "Hardware Eating Site",
-        "created": "2026-04-28"
-    },
-    {
-        "title": "Code Quality",
-        "img": "codequality.png",
-        "href": "26_codequality",
-        "description": "A Flowchart",
-        "created": "2026-04-28"
-    },
-    {
-        "title": "CV",
-        "img": "cv.png",
-        "href": "27_cv",
-        "description": "Hire me",
-        "created": "2026-05-07"
-    },
-    {
-        "title": "Jailbreak",
-        "img": "jailbreak.png",
-        "href": "28_jailbreak",
-        "description": "Trust no bot",
-        "created": "2026-05-07"
-    },
-    {
-        "title": "Bike Ticket",
-        "img": "biketicket.png",
-        "href": "29_biketicket",
-        "description": "It is this simple",
-        "created": "2026-05-08"
-    },
-    {
-        "title": "Layers",
-        "img": "layers.png",
-        "href": "31_layers",
-        "description": "From Sand to Click",
-        "created": "2026-05-19"
-    },
-    {
-        "title": "Apple",
-        "img": "apple.png",
-        "href": "32_apple",
-        "description": "An Artwork",
-        "created": "2026-05-30"
-    },
-    {
-        "title": "Break",
-        "img": "break.png",
-        "href": "33_break",
-        "description": "Take a break",
-        "created": "2026-05-30"
-    },
-    {
         "title": "End",
         "img": "end.png",
-        "href": "30_end",
+        "href": "end",
         "description": "Bye",
         "created":""
     }

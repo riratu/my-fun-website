@@ -97,27 +97,36 @@
     // Get the image-container element where you want to append the images
     const imageContainer = document.getElementById("image-container");
 
-    let i = 0
-    maxLevel = +localStorage.getItem('level')
-    console.log(maxLevel)
-    siteArray.forEach(imageData => {
-        const imageElement = document.createElement("img");
-        imageElement.src = "img/" + imageData.img;
-        if (i > maxLevel - 1) {
-            imageElement.src = "img/locked.png"
-            imageElement.style.filter = "blur(5px)"
+    const solved = JSON.parse(localStorage.getItem("solvedSites")) || [];
+    let firstUnsolvedHref = null;
+    let firstUnsolvedFound = false;
+
+    siteArray.forEach((imageData, i) => {
+        const isSolved = solved.includes(imageData.href) || imageData.href === "/";
+        let accessible;
+
+        if (isSolved) {
+            accessible = true;
+        } else if (!firstUnsolvedFound) {
+            accessible = true;
+            firstUnsolvedFound = true;
+            firstUnsolvedHref = imageData.href;
+        } else {
+            accessible = false;
         }
+
+        const imageElement = document.createElement("img");
+        imageElement.src = accessible ? "img/" + imageData.img : "img/locked.png";
+        if (!accessible) imageElement.style.filter = "blur(5px)";
 
         const anchorElement = document.createElement("a");
-
-        if (i < maxLevel){
+        if (accessible) {
             anchorElement.href = "../" + imageData.href;
-
-        } else {
-            anchorElement.href = "../" + siteArray[maxLevel].href;
+        } else if (firstUnsolvedHref) {
+            anchorElement.href = "../" + firstUnsolvedHref;
         }
         anchorElement.appendChild(imageElement);
-        imageElement.style.width = "250px"
+        imageElement.style.width = "250px";
         imageElement.alt = imageData.title;
         imageElement.title = imageData.description;
 
@@ -143,7 +152,6 @@
         }
 
         imageContainer.appendChild(card);
-        i ++
     });
 
 </script>
