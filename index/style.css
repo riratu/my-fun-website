@@ -1,0 +1,35 @@
+body { margin: 0; background: lightblue; font-size: 18px; }
+.title-bar-text { font-size: 18px; }
+.window-body, .window-body p, .window-body a, label { font-size: 18px; }
+
+/* Tilt control stays upright and on top of everything. */
+#tilt-bar {
+  position: fixed; top: 8px; left: 8px; right: 8px; z-index: 1000;
+}
+#tilt-bar .window-body {
+  display: flex; align-items: center; gap: 1ch;
+}
+#tilt-bar input[type=range] { flex: 1; }
+
+#site {
+  transform-origin: 50% 50%;
+  transition: transform .05s linear;
+  padding: 150px 8px 48px;
+  display: flex; flex-direction: column; gap: 24px;
+  align-items: flex-start;
+}
+.window, #site > .window-body { max-width: 680px; width: 100%; box-sizing: border-box; }
+
+/* Shrink each rotated child to its content so it spins around its own center. */
+.window-body > * { width: fit-content; margin: 8px 0; }
+
+.shots { max-width: 100%; display: flex; gap: 8px; overflow-x: auto; }
+.shots img { height: 160px; }
+.hero { width: 160px; display: block; }
+
+/* WordArt titles; the wrapper takes the tilt rotation so the preset keeps its own transform. */
+.wa { margin: 8px 0 24px; font-weight: normal; line-height: 1.2; }
+h1.wa { font-size: 64px; }
+h2.wa { font-size: 40px; }
+/* The slanted purple preset needs extra room so it doesn't run into the text below. */
+.wa-slanted { margin: 24px 0 48px; }

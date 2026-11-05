@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>giannihorst — start</title>
+  <link rel="stylesheet" href="95.css">
+  <link rel="stylesheet" href="wordart.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="tilt-bar" class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Tilt</div>
+    </div>
+    <div class="window-body">
+      <label for="tilt">Tilt</label>
+      <input id="tilt" type="range" min="-45" max="45" value="0">
+      <span id="tilt-val">0°</span>
+      <label for="spin">Spin</label>
+      <input id="spin" type="range" min="-45" max="45" value="0">
+      <span id="spin-val">0°</span>
+    </div>
+  </div>
+
+  <div id="site">
+    <div class="window-body">
+      <h1 class="wa"><span class="wordart rainbow"><span class="text" data-text="giannihorst">giannihorst</span></span></h1>
+      <p>Welcome. This is the start page for my projects. Pick a window below to open one.</p>
+    </div>
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">dev.giannihorst.ch</div>
+      </div>
+      <div class="window-body">
+        <h2 class="wa"><span class="wordart superhero"><span class="text" data-text="dev">dev</span></span></h2>
+        <p>The jurney — my home on the web.</p>
+        <p><a href="https://dev.giannihorst.ch">Open dev.giannihorst.ch</a></p>
+      </div>
+    </div>
+
+    <div class="window-body">
+      <h2 class="wa"><span class="wordart chrome"><span class="text" data-text="Trafohalle">Trafohalle</span></span></h2>
+      <p>Photos from the Trafohalle — a series of screenshots.</p>
+      <p><a href="https://s.giannihorst.ch">Open s.giannihorst.ch</a></p>
+      <div class="shots" id="trafohalle"></div>
+    </div>
+
+    <div class="window-body">
+      <h2 class="wa wa-slanted"><span class="wordart purple"><span class="text" data-text="Interdimensional">Interdimensional</span></span></h2>
+      <p>An interactive, interdimensional dance experiment in the browser.</p>
+      <p><a href="https://dev.giannihorst.ch/dance/latest/">Open the dance</a></p>
+      <img class="hero" src="img/interdimensional.jpg" alt="Interdimensional">
+    </div>
+  </div>
+
+  <script>
+    // Trafohalle screenshots live beside this file; list them so the static host needs no index.
+    const shots = [
+      "IMG_20251029_182020", "IMG_20251029_185404", "IMG_20251029_185415",
+      "IMG_20251029_185750", "IMG_20251029_204949", "IMG_20251029_204951",
+      "IMG_20251029_204952", "IMG_20251029_210625", "IMG_20251029_210628",
+      "IMG_20251029_210637", "IMG_20251029_210643", "IMG_20251029_210645",
+      "IMG_20251030_181337", "IMG_20251030_181339", "IMG_20251030_181429",
+      "IMG_20251030_181432", "IMG_20251030_185109", "IMG_20251030_185112",
+      "IMG_20251030_190249", "IMG_20251030_190257", "IMG_20251031_202611",
+      "IMG_20251031_202618", "IMG_20251031_202622", "IMG_20251031_202624",
+      "IMG_20251031_202633", "IMG_20251031_202635",
+    ];
+    const row = document.getElementById("trafohalle");
+    for (const name of shots) {
+      const img = document.createElement("img");
+      img.src = "img/trafohalle/" + name + ".jpg";
+      img.loading = "lazy";
+      img.alt = name;
+      row.appendChild(img);
+    }
+
+    const site = document.getElementById("site");
+
+    // Rotate the sub sub elements (direct children of the window bodies).
+    const tilt = document.getElementById("tilt");
+    const val = document.getElementById("tilt-val");
+    const inner = site.querySelectorAll(".window-body > *");
+    tilt.addEventListener("input", () => {
+      for (const el of inner) el.style.transform = "rotate(" + tilt.value + "deg)";
+      val.textContent = tilt.value + "°";
+    });
+
+    // Rotate every section of the site, whether it is a window or not.
+    const spin = document.getElementById("spin");
+    const spinVal = document.getElementById("spin-val");
+    const windows = site.children;
+    spin.addEventListener("input", () => {
+      for (const w of windows) w.style.transform = "rotate(" + spin.value + "deg)";
+      spinVal.textContent = spin.value + "°";
+    });
+  </script>
+</body>
+</html>
