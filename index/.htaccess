@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} (GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|CCBot|Bytespider|Google-Extended|PerplexityBot|Applebot-Extended|cohere-ai|Amazonbot|meta-externalagent|Diffbot|omgili) [NC]
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^ /info.html [L]

@@ -9,24 +9,39 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="tilt-bar" class="window">
-    <div class="title-bar">
-      <div class="title-bar-text">Tilt</div>
-    </div>
-    <div class="window-body">
-      <label for="tilt">Tilt</label>
-      <input id="tilt" type="range" min="-45" max="45" value="0">
-      <span id="tilt-val">0°</span>
-      <label for="spin">Spin</label>
-      <input id="spin" type="range" min="-45" max="45" value="0">
-      <span id="spin-val">0°</span>
-    </div>
-  </div>
-
+  <button id="reset" onclick="location.reload()">Reset</button>
+  <div id="stage">
   <div id="site">
+    <marquee class="netscape" scrollamount="4">
+      <span>This site does not work in Netscape Navigator</span>
+      <svg class="netscape-badge" viewBox="0 0 88 31" width="88" height="31" role="img" aria-label="Netscape Not!">
+          <defs>
+            <linearGradient id="ns-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#000033"/>
+              <stop offset="1" stop-color="#1a4d99"/>
+            </linearGradient>
+          </defs>
+          <rect width="88" height="31" fill="url(#ns-sky)"/>
+          <circle cx="40" cy="5" r=".7" fill="#fff"/><circle cx="60" cy="9" r=".6" fill="#fff"/>
+          <circle cx="80" cy="4" r=".7" fill="#fff"/><circle cx="50" cy="26" r=".5" fill="#fff"/>
+          <path d="M3 29 Q18 22 31 29 Z" fill="#0b2a5c"/>
+          <path d="M24 4 L8 13" stroke="#cfe3ff" stroke-width="1.2" stroke-linecap="round"/>
+          <text x="15" y="25" font-family="Times New Roman, serif" font-weight="bold" font-size="24" fill="#fff" text-anchor="middle">N</text>
+          <text x="58" y="14" font-family="Arial, sans-serif" font-weight="bold" font-size="8" fill="#ffcc00" text-anchor="middle">NETSCAPE</text>
+          <text x="58" y="25" font-family="Arial, sans-serif" font-weight="bold" font-size="9" fill="#ff3333" text-anchor="middle">NOT!</text>
+        </svg>
+    </marquee>
+
     <div class="window-body">
-      <h1 class="wa"><span class="wordart rainbow"><span class="text" data-text="giannihorst">giannihorst</span></span></h1>
-      <p>Welcome. This is the start page for my projects. Pick a window below to open one.</p>
+      <h1 class="wa"><span class="wordart rainbow"><span class="text" data-text="giannihorst.ch">giannihorst.ch</span></span></h1>
+      <p>Welcome to my web page</p>
+      <p>I am a Software Engineer. Period.</p>
+    </div>
+
+    <div class="window-body gifs">
+      <img class="pixel" src="img/hamster.gif" width="96" height="96" alt="A dancing hamster">
+      <img class="pixel" src="img/construction.gif" width="96" height="96" alt="Under construction">
+      <p class="construction">Under construction!</p>
     </div>
 
     <div class="window">
@@ -40,12 +55,48 @@
       </div>
     </div>
 
+    <div id="tilt-bar" class="window controls">
+      <div class="title-bar">
+        <div class="title-bar-text">Tilt</div>
+      </div>
+      <div class="window-body">
+        <label for="tilt">Tilt</label>
+        <input id="tilt" type="range" min="-45" max="45" value="0">
+        <span id="tilt-val">0°</span>
+        <label for="spin">Spin</label>
+        <input id="spin" type="range" min="-45" max="45" value="0">
+        <span id="spin-val">0°</span>
+      </div>
+    </div>
+
+    <div class="window" id="teapot-window">
+      <div class="title-bar">
+        <div class="title-bar-text">teapot.exe</div>
+      </div>
+      <div class="window-body">
+        <div class="teapot-view" id="teapot-view"><span class="teapot-hint">click me</span></div>
+      </div>
+    </div>
+
     <div class="window-body">
       <h2 class="wa"><span class="wordart chrome"><span class="text" data-text="Trafohalle">Trafohalle</span></span></h2>
       <p>Photos from the Trafohalle — a series of screenshots.</p>
-      <p><a href="https://s.giannihorst.ch">Open s.giannihorst.ch</a></p>
+      <p><a href="https://s.giannihorst.ch/latest/">Open s.giannihorst.ch</a></p>
       <div class="shots" id="trafohalle"></div>
     </div>
+
+    <div id="extrude-bar" class="window controls">
+      <div class="title-bar">
+        <div class="title-bar-text">Extrude</div>
+      </div>
+      <div class="window-body">
+        <label for="extrude">Extrude</label>
+        <input id="extrude" type="range" min="0" max="80" value="0">
+        <span id="extrude-val">0px</span>
+      </div>
+    </div>
+
+    <button id="physics" class="controls">Physics</button>
 
     <div class="window-body">
       <h2 class="wa wa-slanted"><span class="wordart purple"><span class="text" data-text="Interdimensional">Interdimensional</span></span></h2>
@@ -53,6 +104,17 @@
       <p><a href="https://dev.giannihorst.ch/dance/latest/">Open the dance</a></p>
       <img class="hero" src="img/interdimensional.jpg" alt="Interdimensional">
     </div>
+
+    <div class="window-body code-block">
+      <div class="code-box" id="code-box">
+        <pre id="code">&lt;!-- This code is 100% handmade. --&gt;
+&lt;html onclick="s()"style="width:100%;height:100%;background-color: black"&gt;&lt;html onclick="s()" style="width:100%;height:100%;background-color: black"&gt;&lt;script&gt;
+    async function s(){ac=new AudioContext;let e=new Blob(['class S extends AudioWorkletProcessor{constructor(){super(),this.c=0}process(t,e){let s=Math.sin,r=e[0];for(let t of r)for(let e=0;e&lt;t.length;e++){let r=this.c/sampleRate*1e3%1e3;for(let a=0;a&lt;10;a++)t[e]=s(2*Math.PI*r*(2*a)*.02);let a=.5*(500-r%500)+Math.sin(.01*r),o=r%500&lt;150?1:0;t[e]=s(2*Math.PI*a*(r/1e3))*o;for(let a=0;a&lt;10;a++)t[e]+=.1*s(2*Math.PI*(3*a)*(.5*s(this.c/sampleRate*.1))*(.5*s(this.c/sampleRate*10))*r/50),t[e]+=.01*s(2*Math.PI*r*.2+a*(s(.001*this.c)+1));r%125&lt;10+r%100&amp;&amp;(t[e]+=.2*Math.random(-.1,.1)),this.c++}return!0}}registerProcessor("s",S);'],{type:"application/javascript"});await ac.audioWorklet.addModule(URL.createObjectURL(e)),new AudioWorkletNode(ac,"s").connect(ac.destination),t=9,x=c.getContext`2d`,c.width=c.height=1e3;let a=Math.random(),r=Math.sin;setInterval((()=&gt;{t+=20,x.clearRect(0,0,c.width,c.height);for(let e=0;e&lt;100;e++){x.strokeStyle=`rgba(${.05*e*t%50}, ${.01*e%30}, ${.01*t%155}, 0.9)`,x.beginPath(),x.arc(500,500,(10*e+t%1e3)*(t%2e3)*.001*.5,0,2*Math.PI),x.stroke(),x.beginPath(),x.strokeStyle="#AAA";let s=r(.001*t)*e+4*e;x.arc(500+20*a,500+20*a,5*e*(1+r(.001*t))*10,s,s+2*(13e-5*t%4+1)*.01),x.stroke(),x.fillStyle="white",tmp1=e/100*(t%1e3)+10*a;let o=500+r(e)*tmp1,c=500+Math.cos(e)*tmp1;x.fillRect(o,c,1,1),o=Math.cos(e)*(e/100)*(t%2e3)+5*a+500,c=r(e)*(e/100)*(t%2e4)+5*a+500,x.fillRect(o,c,2,2)}}),18)}
+&lt;/script&gt;&lt;canvas id="c"&gt;</pre>
+        <button id="run-code">Run as background</button>
+      </div>
+    </div>
+  </div>
   </div>
 
   <script>
@@ -82,7 +144,7 @@
     // Rotate the sub sub elements (direct children of the window bodies).
     const tilt = document.getElementById("tilt");
     const val = document.getElementById("tilt-val");
-    const inner = site.querySelectorAll(".window-body > *");
+    const inner = site.querySelectorAll(":not(.controls) > .window-body > *");
     tilt.addEventListener("input", () => {
       for (const el of inner) el.style.transform = "rotate(" + tilt.value + "deg)";
       val.textContent = tilt.value + "°";
@@ -91,11 +153,348 @@
     // Rotate every section of the site, whether it is a window or not.
     const spin = document.getElementById("spin");
     const spinVal = document.getElementById("spin-val");
-    const windows = site.children;
+    const windows = [...site.children].filter((w) => !w.classList.contains("controls"));
     spin.addEventListener("input", () => {
       for (const w of windows) w.style.transform = "rotate(" + spin.value + "deg)";
       spinVal.textContent = spin.value + "°";
     });
+
+    // Lift every element off its parent, so nested elements stack up in 3D.
+    const extrude = document.getElementById("extrude");
+    const extrudeVal = document.getElementById("extrude-val");
+    extrude.addEventListener("input", () => {
+      site.style.setProperty("--extrude", extrude.value + "px");
+      site.style.setProperty("--extrude-turn", extrude.value / extrude.max);
+      site.classList.toggle("extruded", extrude.value > 0);
+      extrudeVal.textContent = extrude.value + "px";
+    });
+    const stage = document.getElementById("stage");
+    // Boxes: windows, title bars and buttons get four side walls reaching down to their parent.
+    for (const el of site.querySelectorAll(".window, .title-bar, button")) {
+      const depth = document.createElement("div");
+      depth.className = "depth";
+      depth.innerHTML = '<i class="top"></i><i class="bottom"></i><i class="left"></i><i class="right"></i>';
+      el.appendChild(depth);
+    }
+
+    // Physics: load p5play only when asked, then every block of the site crashes to the bottom.
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    const physics = document.getElementById("physics");
+    physics.addEventListener("click", async () => {
+      physics.disabled = true;
+      for (const src of ["lib/p5/p5.min.js", "lib/p5/planck.min.js", "lib/p5/p5play.js"]) await loadScript(src);
+      crash();
+    });
+
+    function crash() {
+      // Flatten the page first: no extrude, no 3D, and #stage must not hold the fixed blocks.
+      extrude.value = 0;
+      extrude.dispatchEvent(new Event("input"));
+      stage.style.perspective = "none";
+      site.style.transform = "none";
+      document.documentElement.style.overflow = "hidden";
+
+      // Measure everything first, moving one block would shift the others.
+      const blocks = [...site.children];
+      const rects = blocks.map((el) => el.getBoundingClientRect());
+      const bodies = [];
+
+      // The physics world is bigger than the screen; the view zooms out to show all of it.
+      // At the start the view shows the bottom middle of the world, exactly where the page was.
+      const ZOOM_OUT = 0.5;
+      let worldW, worldH, startTime;
+      function toScreen(x, y, zoom) {
+        return [(x - worldW / 2) * zoom + width / 2, (y - worldH) * zoom + height];
+      }
+
+      window.setup = () => {
+        const canvas = createCanvas(window.innerWidth, window.innerHeight);
+        canvas.elt.classList.add("physics-canvas");
+        worldW = width / ZOOM_OUT;
+        worldH = height / ZOOM_OUT;
+        const offsetX = (worldW - width) / 2, offsetY = worldH - height;
+        startTime = millis();
+        // Gravity pulls down and somewhat to the right.
+        world.gravity.y = 10;
+        world.gravity.x = 6;
+        blocks.forEach((el, i) => {
+          const r = rects[i];
+          if (!r.width || !r.height) return;
+          el.style.position = "fixed";
+          el.style.left = "0";
+          el.style.top = "0";
+          el.style.margin = "0";
+          el.style.width = r.width + "px";
+          el.style.height = r.height + "px";
+          // Blocks below the screen drop in from above instead.
+          const y = r.top > height ? -r.height - random(600) : r.top + r.height / 2;
+          const s = new Sprite(r.left + r.width / 2 + offsetX, y + offsetY, r.width, r.height);
+          s.visible = false;
+          s.bounciness = 0.3;
+          s.rotationSpeed = random(-1, 1);
+          bodies.push({ el, s, w: r.width, h: r.height });
+        });
+        for (const wall of [
+          new Sprite(worldW / 2, worldH + 50, worldW * 3, 100, "static"),
+          new Sprite(-50, worldH / 2, 100, worldH * 6, "static"),
+          new Sprite(worldW + 50, worldH / 2, 100, worldH * 6, "static"),
+        ]) wall.visible = false;
+      };
+      window.draw = () => {
+        clear();
+        const t = Math.min(1, (millis() - startTime) / 1500);
+        const zoom = 1 - (1 - ZOOM_OUT) * t * t * (3 - 2 * t);
+        for (const b of bodies) {
+          const [x, y] = toScreen(b.s.x, b.s.y, zoom);
+          b.el.style.transform = "translate(" + (x - b.w / 2) + "px, " + (y - b.h / 2) + "px) scale(" + zoom + ") rotate(" + b.s.rotation + "deg)";
+        }
+      };
+      new p5();
+    }
+
+    // Run the code shown above as the background of the whole site.
+    // Its script goes into the page and draws on a canvas with the id "c". It plays sound, so it runs only once.
+    const runCode = document.getElementById("run-code");
+    runCode.addEventListener("click", () => {
+      runCode.disabled = true;
+      const canvas = document.createElement("canvas");
+      canvas.id = "c";
+      canvas.className = "background-piece";
+      document.body.prepend(canvas);
+      const js = document.getElementById("code").textContent.split("<script>")[1].split("</" + "script>")[0];
+      const script = document.createElement("script");
+      script.textContent = js;
+      document.body.appendChild(script);
+      s();
+    });
+
+    function viewMiddle() {
+      stage.style.setProperty("--view-middle", window.scrollY + window.innerHeight / 2 + "px");
+    }
+    window.addEventListener("scroll", viewMiddle);
+    window.addEventListener("resize", viewMiddle);
+    viewMiddle();
+  </script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./lib/three/three.module.min.js",
+        "three/addons/": "./lib/three/addons/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { TeapotGeometry } from "three/addons/geometries/TeapotGeometry.js";
+
+    // A teapot in a window. Clicking it turns the whole page in place around the teapot,
+    // which keeps its place. The page extrudes and the lights go down while it turns.
+    // Clicking again lets the page come to rest facing the front.
+    const win = document.getElementById("teapot-window");
+    const view = document.getElementById("teapot-view");
+    const site = document.getElementById("site");
+    const stage = document.getElementById("stage");
+    const extrude = document.getElementById("extrude");
+    const PERSPECTIVE = 1000; // matches #stage in style.css
+    const PX_PER_UNIT = 48;
+
+    const scene = new THREE.Scene();
+    // One renderer in the window, one over the whole page for while it turns.
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    view.appendChild(renderer.domElement);
+    const pageRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    pageRenderer.setPixelRatio(window.devicePixelRatio);
+    pageRenderer.domElement.className = "page-teapot";
+    document.body.appendChild(pageRenderer.domElement);
+
+    // A single camera in page pixels that matches the CSS perspective of #stage.
+    // The window shows its own piece of that view, so the teapot keeps its place when the page takes over.
+    const camera = new THREE.PerspectiveCamera(50, 1, 1, 10000);
+
+    const pot = new THREE.Group();
+    pot.scale.setScalar(PX_PER_UNIT);
+    pot.rotation.x = 0.3;
+    scene.add(pot);
+    const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true });
+    const teapot = new THREE.Mesh(new TeapotGeometry(1.3, 6), material);
+    teapot.position.y = -0.3;
+    pot.add(teapot);
+
+    // The page's outline with the teapot's view cut out. It only writes depth,
+    // so the teapot is hidden where the page is in front of it.
+    const turn = new THREE.Group();
+    scene.add(turn);
+    let occluder = null;
+
+    const TILT = 0.15;
+    const TURN_EXTRUDE = 30;
+    let angle = 0;
+    let speed = 0;
+    let turning = false;
+    let wantTurning = false;
+    let dark = 0;
+    let move = 0;
+    let enteredAt = 0;
+    let extrudeBefore = 0;
+    let center = null; // teapot center in page coordinates, measured while the page is flat
+
+    function resize() {
+      const w = window.innerWidth, h = window.innerHeight;
+      camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(h / 2 / PERSPECTIVE));
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      pageRenderer.setSize(w, h);
+      renderer.setSize(view.clientWidth, view.clientHeight);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    // The camera sits in the middle of the screen, the teapot at the center of its view.
+    function placeCamera(tx, ty) {
+      const camX = window.innerWidth / 2 - tx, camY = ty - window.innerHeight / 2;
+      camera.position.set(camX, camY, PERSPECTIVE);
+      camera.lookAt(camX, camY, 0);
+    }
+
+    function setExtrude(value) {
+      extrude.value = value;
+      extrude.dispatchEvent(new Event("input"));
+    }
+
+    function start() {
+      // Measure on the flat page, not on the one turned by extrude.
+      site.style.transition = "none";
+      site.style.transform = "none";
+      site.style.translate = "none";
+      const v = view.getBoundingClientRect();
+      const s = site.getBoundingClientRect();
+      const cx = v.left + v.width / 2, cy = v.top + v.height / 2;
+      center = { x: cx + window.scrollX, y: cy + window.scrollY };
+
+      // Page outline and the cut-out, in pixels around the teapot, y up.
+      const outline = new THREE.Shape();
+      outline.moveTo(s.left - cx, cy - s.bottom);
+      outline.lineTo(s.right - cx, cy - s.bottom);
+      outline.lineTo(s.right - cx, cy - s.top);
+      outline.lineTo(s.left - cx, cy - s.top);
+      const hole = new THREE.Path();
+      hole.moveTo(-v.width / 2, -v.height / 2);
+      hole.lineTo(-v.width / 2, v.height / 2);
+      hole.lineTo(v.width / 2, v.height / 2);
+      hole.lineTo(v.width / 2, -v.height / 2);
+      outline.holes.push(hole);
+      occluder = new THREE.Mesh(
+        new THREE.ShapeGeometry(outline),
+        new THREE.MeshBasicMaterial({ colorWrite: false, side: THREE.DoubleSide })
+      );
+      occluder.renderOrder = -1;
+      turn.add(occluder);
+
+      site.style.transformOrigin = (cx - s.left) + "px " + (cy - s.top) + "px";
+      stage.style.setProperty("--origin-x", window.innerWidth / 2 + "px");
+      extrudeBefore = Number(extrude.value);
+      renderer.domElement.style.visibility = "hidden";
+      pageRenderer.domElement.style.visibility = "visible";
+      document.body.classList.add("turning");
+      turning = true;
+    }
+
+    function stop() {
+      turning = false;
+      turn.remove(occluder);
+      angle = 0;
+      speed = 0;
+      site.style.transform = "";
+      site.style.transformOrigin = "";
+      site.style.transition = "";
+      stage.style.removeProperty("--origin-x");
+      pageRenderer.clear();
+      pageRenderer.domElement.style.visibility = "hidden";
+      renderer.domElement.style.visibility = "visible";
+    }
+
+    win.addEventListener("click", () => {
+      if (wantTurning) return;
+      wantTurning = true;
+      enteredAt = performance.now();
+      if (!turning) start();
+    });
+
+    // While the page turns, a click anywhere brings it back (and does nothing else).
+    document.addEventListener("click", (e) => {
+      if (!wantTurning || e.target.closest("#reset")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      wantTurning = false;
+      document.body.classList.remove("turning");
+    }, true);
+
+    const white = new THREE.Color(0xffffff), black = new THREE.Color(0x000000);
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const dt = Math.min(clock.getDelta(), 0.1);
+
+      // Lights go down while turning: the page extrudes and the teapot turns white.
+      const before = dark;
+      dark = THREE.MathUtils.clamp(dark + (wantTurning ? dt : -dt), 0, 1);
+      if (dark !== before) setExtrude(Math.round(extrudeBefore + (Math.max(extrudeBefore, TURN_EXTRUDE) - extrudeBefore) * dark));
+      material.color.lerpColors(black, white, dark);
+
+      // Move the whole page so the teapot sits in the middle of the screen, a moment after entering,
+      // and straight back when leaving.
+      const wantMove = wantTurning && performance.now() - enteredAt > 2500;
+      move = THREE.MathUtils.clamp(move + (wantMove ? dt / 3 : -dt), 0, 1);
+      let shiftX = 0, shiftY = 0;
+      if (center) {
+        const e = move * move * (3 - 2 * move);
+        shiftX = (window.innerWidth / 2 - (center.x - window.scrollX)) * e;
+        shiftY = (window.innerHeight / 2 - (center.y - window.scrollY)) * e;
+        site.style.translate = shiftX + "px " + shiftY + "px";
+      }
+
+      if (!turning) {
+        teapot.rotation.y += dt * 0.5;
+        const v = view.getBoundingClientRect();
+        placeCamera(v.left + v.width / 2, v.top + v.height / 2);
+        camera.setViewOffset(window.innerWidth, window.innerHeight, v.left, v.top, v.width, v.height);
+        renderer.render(scene, camera);
+        camera.clearViewOffset();
+        return;
+      }
+
+      // Speed up, or turn back fast the shortest way to face the front.
+      if (wantTurning) {
+        speed = Math.min(0.5, speed + dt * 0.3);
+        angle += speed * dt;
+      } else {
+        const front = Math.round(angle / (2 * Math.PI)) * 2 * Math.PI;
+        angle += (front - angle) * Math.min(1, dt * 6);
+        speed = Math.max(0, speed - dt * 2);
+        if (Math.abs(front - angle) < 0.002) {
+          stop();
+          return;
+        }
+      }
+      const tilt = TILT * Math.min(1, speed / 0.5);
+      site.style.transform = "rotateX(" + tilt + "rad) rotateY(" + angle + "rad)";
+      turn.rotation.set(-tilt, angle, 0);
+
+      placeCamera(center.x - window.scrollX + shiftX, center.y - window.scrollY + shiftY);
+      pageRenderer.render(scene, camera);
+    }
+    animate();
   </script>
 </body>
 </html>

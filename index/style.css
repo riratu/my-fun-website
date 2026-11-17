@@ -1,20 +1,28 @@
-body { margin: 0; background: lightblue; font-size: 18px; }
+body { margin: 0; background: lightblue; font-size: 18px; transition: background-color 1s; }
+/* While the page turns the lights go down, with some light from above. */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, #8a9aaa 0%, #303840 35%, #000 75%);
+  opacity: 0; transition: opacity 1s;
+}
+body.turning { background-color: black; }
+body.turning::before { opacity: 1; }
+/* Text that sits on the background (not in a window) stays readable in the dark. */
+#site > .window-body { transition: color 1s; }
+body.turning #site > .window-body { color: #ddd; }
 .title-bar-text { font-size: 18px; }
 .window-body, .window-body p, .window-body a, label { font-size: 18px; }
 
-/* Tilt control stays upright and on top of everything. */
-#tilt-bar {
-  position: fixed; top: 8px; left: 8px; right: 8px; z-index: 1000;
-}
-#tilt-bar .window-body {
+/* Tilt and Extrude controls are windows among the others, but they don't tilt themselves. */
+.controls .window-body {
   display: flex; align-items: center; gap: 1ch;
 }
-#tilt-bar input[type=range] { flex: 1; }
+.controls input[type=range] { flex: 1; }
 
 #site {
   transform-origin: 50% 50%;
   transition: transform .05s linear;
-  padding: 150px 8px 48px;
+  padding: 48px 8px;
   display: flex; flex-direction: column; gap: 24px;
   align-items: flex-start;
 }
@@ -33,3 +41,87 @@ h1.wa { font-size: 64px; }
 h2.wa { font-size: 40px; }
 /* The slanted purple preset needs extra room so it doesn't run into the text below. */
 .wa-slanted { margin: 24px 0 48px; }
+
+/* Teapot window. Clicking it turns the page in place around the teapot. */
+#teapot-window { width: 340px; cursor: pointer; }
+#teapot-window, #site.extruded #teapot-window { background: transparent; }
+.teapot-view { position: relative; width: 320px; height: 220px; }
+.teapot-hint {
+  position: absolute; right: 6px; bottom: 4px; z-index: 1; pointer-events: none;
+  font-size: 16px; color: #333; transition: opacity 1s;
+}
+body.turning .teapot-hint { opacity: 0; }
+.teapot-view canvas { position: absolute; top: 0; left: 0; pointer-events: none; }
+canvas.page-teapot { position: fixed; top: 0; left: 0; z-index: 10; pointer-events: none; visibility: hidden; }
+
+/* The page turns and extrudes inside this perspective. While turning, it is seen from the middle of the screen;
+   otherwise the layers spread out from the left edge, so nothing is pushed off the left side. */
+#stage { perspective: 1000px; perspective-origin: var(--origin-x, 0) var(--view-middle, 50%); }
+
+/* Extrude: every element is lifted off its parent, nested ones stack up. */
+#site.extruded, #site.extruded * { transform-style: preserve-3d; }
+#site.extruded * { translate: 0 0 var(--extrude); }
+/* The more it is extruded, the more the page turns and moves right, so the layers can be seen from the side.
+   While the teapot turns the page, its own transform takes over. */
+#site.extruded {
+  transform: translateX(calc(var(--extrude-turn) * 150px)) rotateX(calc(var(--extrude-turn) * 12deg)) rotateY(calc(var(--extrude-turn) * -25deg));
+  transform-origin: 50% var(--view-middle, 50%);
+}
+/* Box walls, folded back from each edge down to the parent, shaded for light from above. */
+#site .window, #site .title-bar, #site button { position: relative; }
+.depth { display: none; }
+#site.extruded .depth {
+  display: block; position: absolute; inset: 0; pointer-events: none;
+  transform-style: preserve-3d;
+}
+#site.extruded .depth, #site.extruded .depth * { translate: none; box-shadow: none; }
+.depth i { position: absolute; background: var(--face); }
+#site .window, #site button { --face: silver; }
+#site .title-bar { --face: navy; }
+#site #teapot-window { --face: rgba(255, 255, 255, .25); }
+.depth .top { left: 0; right: 0; bottom: 100%; height: var(--extrude); transform-origin: bottom; transform: rotateX(90deg); filter: brightness(1.3); }
+.depth .bottom { left: 0; right: 0; top: 100%; height: var(--extrude); transform-origin: top; transform: rotateX(-90deg); filter: brightness(.5); }
+.depth .left { top: 0; bottom: 0; right: 100%; width: var(--extrude); transform-origin: right; transform: rotateY(-90deg); filter: brightness(.8); }
+.depth .right { top: 0; bottom: 0; left: 100%; width: var(--extrude); transform-origin: left; transform: rotateY(90deg); filter: brightness(.7); }
+
+/* A light from above: the higher something is lifted, the further down and softer its shadow falls. */
+#site.extruded { text-shadow: 0 calc(var(--extrude) * .4) calc(var(--extrude) * .25) rgba(0, 0, 0, .35); }
+#site.extruded { --lift-shadow: 0 calc(var(--extrude) * .6) calc(var(--extrude) * .5) rgba(0, 0, 0, .3); }
+#site.extruded :is(.title-bar, img, .teapot-view) { box-shadow: var(--lift-shadow); }
+/* 95.css draws its bevels with box-shadow, so keep them and add the lift shadow. */
+#site.extruded .window {
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff, var(--lift-shadow);
+}
+#site.extruded button {
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf, var(--lift-shadow);
+}
+
+/* Reset stays in the top left corner above everything. */
+#reset { position: fixed; top: 8px; left: 8px; z-index: 10000; }
+.physics-canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 5; }
+
+/* Code to read, with a button to run it as the background. */
+.code-block pre {
+  max-width: 100%; max-height: 320px; overflow: auto; box-sizing: border-box;
+  white-space: pre-wrap; word-break: break-all;
+  background: black; color: #ccc; font: 9px monospace; padding: 8px 8px 36px; margin: 0;
+}
+/* The Run button sits inside the code box, bottom right. */
+.code-box { position: relative; max-width: 100%; }
+.code-box #run-code { position: absolute; right: 8px; bottom: 8px; }
+/* The piece as the background of the whole site, filling the screen behind everything. */
+.background-piece {
+  position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -2;
+  object-fit: cover; background: black; pointer-events: none;
+}
+
+/* "Does not work in Netscape" marquee at the top of the site. */
+.netscape { width: 100%; max-width: 680px; font-weight: bold; color: #c00; }
+.netscape span, .netscape-badge { vertical-align: middle; margin-right: 12px; }
+
+/* Dancing hamster and under construction sign, pixel art kept crisp. */
+.gifs { display: flex; align-items: center; gap: 16px; }
+.gifs > * { margin: 0; }
+.pixel { image-rendering: pixelated; }
+.construction { font-weight: bold; color: #000; background: repeating-linear-gradient(45deg, #ffcc00 0 12px, #111 12px 24px); padding: 6px 10px; }
+.construction { -webkit-text-stroke: 0; text-shadow: 0 0 3px #ffcc00, 0 0 3px #ffcc00, 0 0 3px #ffcc00; }
